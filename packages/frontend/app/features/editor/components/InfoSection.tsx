@@ -22,8 +22,8 @@ export function InfoSection() {
         saved.
       </Text>
       <Text size="sm" ta="center">
-        Run your downloaded cover through an image compressor, you are then set to publish! If you have any suggestions
-        for the app, share them with me{' '}
+        Run your saved cover through an image compressor, you are then set to publish! If you have any suggestions for
+        the app, share them with me{' '}
         <a
           href="https://x.com/Kieran6dev"
           target="_blank"
