@@ -73,7 +73,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
           onClick={open}
           size="sm"
         >
-          Preview/Download
+          Preview/Save
         </Button>
 
         <Drawer.Root
@@ -117,7 +117,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
                 mt="auto"
               >
                 <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-                Download image
+                Save image
               </Button>
             </Drawer.Body>
           </Drawer.Content>
