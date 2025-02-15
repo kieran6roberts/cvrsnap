@@ -1,7 +1,7 @@
 # CvrSnap
 
 Most blog posts need a good cover image. CvrSnap empowers you to create great looking blog cover
-images in seconds using templates and simple editing tools. It's completely free to download as many cover
+images in seconds using templates and simple editing tools. It's completely free to save as many cover
 images as you like.
 
 I initially built this tool for myself because I wanted quick and simple blog cover images for my own blog, something that would be enjoyable to use. I didn't care for complex design and wanted to highlight my blog title/author name.
