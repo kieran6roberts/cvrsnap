@@ -9,7 +9,7 @@ import { GITHUB_URL, SITE_NAME } from '~/config/consts';
 export function DownloadSuccessModal({ close }: { close: () => void }) {
   useEffect(() => {
     requestAnimationFrame(() => {
-      toast.success('Image downloaded successfully.', {
+      toast.success('Image saved successfully.', {
         icon: <Check width={24} height={24} color="var(--mantine-primary-color-8)" />,
         id: 'download-success',
         duration: 2000

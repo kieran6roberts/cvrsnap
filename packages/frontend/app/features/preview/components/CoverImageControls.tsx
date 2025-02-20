@@ -44,7 +44,7 @@ export function CoverImageControls({
         className="plausible-event-name=Download+Image"
       >
         <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-        Download image
+        Save image
       </Button>
     </Flex>
   );

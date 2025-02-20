@@ -16,7 +16,7 @@ context('Active cover Settings', () => {
 
     cy.log('1. DEFAULT SETTINGS (COVER SIZE)');
 
-    cy.findByRole('textbox', { name: 'Image download size' }).should('exist').and('have.value', '1600x840 (Hashnode)');
+    cy.findByRole('textbox', { name: 'Image size' }).should('exist').and('have.value', '1600x840 (Hashnode)');
 
     cy.log('1. DEFAULT SETTINGS (TEMPLATES)');
 
@@ -112,9 +112,9 @@ context('Active cover Settings', () => {
 
     cy.log('2. UPDATE SETTINGS (COVER SIZE)');
 
-    cy.findByRole('textbox', { name: 'Image download size' }).realClick();
+    cy.findByRole('textbox', { name: 'Image size' }).realClick();
     cy.findByRole('option', { name: newData.imageDownloadSize }).should('exist').realClick();
-    cy.findByRole('textbox', { name: 'Image download size' }).should('have.value', newData.imageDownloadSize);
+    cy.findByRole('textbox', { name: 'Image size' }).should('have.value', newData.imageDownloadSize);
 
     cy.log('2. UPDATE SETTINGS (TEMPLATES)');
 
@@ -201,9 +201,7 @@ context('Active cover Settings', () => {
     cy.reload();
     cy.log('3. ASSERT PERSISTED VALUES (COVER SIZE)');
 
-    cy.findByRole('textbox', { name: 'Image download size' })
-      .should('exist')
-      .and('have.value', newData.imageDownloadSize);
+    cy.findByRole('textbox', { name: 'Image size' }).should('exist').and('have.value', newData.imageDownloadSize);
 
     cy.log('3. ASSERT PERSISTED VALUES (TEMPLATES)');
 
@@ -277,7 +275,7 @@ context('Active cover Settings', () => {
 
     cy.findByRole('button', { name: 'Reset cover' }).should('exist').realClick();
 
-    cy.findByRole('textbox', { name: 'Image download size' }).should('exist').and('have.value', '1600x840 (Hashnode)');
+    cy.findByRole('textbox', { name: 'Image size' }).should('exist').and('have.value', '1600x840 (Hashnode)');
 
     cy.log('4. RESET AND CHECK DEFAULT VALUES (COVER SIZE)');
 

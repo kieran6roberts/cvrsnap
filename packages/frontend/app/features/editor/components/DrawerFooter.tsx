@@ -9,7 +9,7 @@ import { useImageDownload } from '~/shared/hooks/useImageDownload';
 import { DownloadSuccessModal } from '~/shared/components/DownloadSuccessModal';
 import { CoverImageSize } from '~/features/preview/components/CoverImageSize';
 import { getAspectRatioData, updateCSSVariables } from '~/shared/utils/styles';
-
+import type { DownloadSizeInfo } from '~/shared/consts';
 interface DrawerFooterProps {
   resetEditor: () => void;
   imageNodeRef: React.RefObject<HTMLDivElement | null>;
@@ -30,12 +30,12 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
     close();
   };
 
-  const onAspectRatioChange = (value: string | null) => {
+  const onAspectRatioChange = (value: DownloadSizeInfo | null) => {
     if (!value) return;
     const { id, aspectRatio, width, height } = getAspectRatioData(value);
 
     updateCSSVariables({ '--cover-aspect-ratio': `${aspectRatio}` });
-    updateCover({ id, width: Number(width), height: Number(height), aspectRatio: Number(aspectRatio) });
+    updateCover({ id, width, height, aspectRatio });
   };
 
   return (
@@ -73,7 +73,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
           onClick={open}
           size="sm"
         >
-          Preview/Download
+          Preview/Save
         </Button>
 
         <Drawer.Root
@@ -99,7 +99,10 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
               px={24}
               style={{ alignItems: 'center' }}
             >
-              <CoverImageSize defaultImageSize={defaultImageSize} onAspectRatioChange={onAspectRatioChange} />
+              <CoverImageSize
+                defaultImageSize={defaultImageSize}
+                onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
+              />
               <ImagePreview imageNodeRef={imageNodeRef} />
 
               <Button
@@ -114,7 +117,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
                 mt="auto"
               >
                 <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-                Download image
+                Save image
               </Button>
             </Drawer.Body>
           </Drawer.Content>

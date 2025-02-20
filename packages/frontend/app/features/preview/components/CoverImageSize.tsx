@@ -1,6 +1,6 @@
 import { Select } from '@mantine/core';
 
-import { IMAGE_DOWNLOAD_SIZES } from '~/features/editor/consts';
+import { IMAGE_DOWNLOAD_SIZES } from '~/shared/consts';
 
 export function CoverImageSize({
   defaultImageSize,
@@ -11,7 +11,7 @@ export function CoverImageSize({
 }) {
   return (
     <Select
-      label="Image download size"
+      label="Image size"
       w="275px"
       value={defaultImageSize}
       data={Object.values(IMAGE_DOWNLOAD_SIZES).map((size) => ({
