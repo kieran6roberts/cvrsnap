@@ -1,5 +1,12 @@
-.navbar {
+:root {
+  --main-header-height: 69px;
+}
+
+.main-header {
   background-color: white;
+  height: var(--main-header-height);
+  border-bottom: 1px solid var(--mantine-color-default-border);
+  z-index: 50;
 
   [data-mantine-color-scheme='dark'] & {
     background-color: var(--mantine-color-dark-8);

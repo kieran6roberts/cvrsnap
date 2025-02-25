@@ -10,14 +10,8 @@ import classes from './styles/Navbar.module.css';
 
 export function Navbar() {
   return (
-    <Box
-      component="header"
-      w="100%"
-      px="lg"
-      style={{ borderBottom: '1px solid var(--mantine-color-default-border)', zIndex: 50 }}
-      className={classes.navbar}
-    >
-      <Flex component="nav" justify="space-between" align="center" h="68px">
+    <Box component="header" w="100%" className={classes['main-header']}>
+      <Flex component="nav" justify="space-between" align="center" h="100%" w="100%" px="lg">
         <Flex
           component={Link}
           to="/"
