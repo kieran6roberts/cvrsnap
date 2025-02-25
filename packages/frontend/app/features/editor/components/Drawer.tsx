@@ -1,7 +1,5 @@
-import { Flex, Box, ScrollArea, Title, ActionIcon, Tabs, Stack } from '@mantine/core';
+import { Flex, Box, Title, ActionIcon, Tabs, Stack } from '@mantine/core';
 import { Text as IconText, MediaImage, AlignBottomBox, ArrowLeftTag, InfoCircle } from 'iconoir-react';
-import { useRef, useEffect } from 'react';
-import { useViewportSize } from '@mantine/hooks';
 
 import classes from '~/features/editor/styles/EditorDrawer.module.css';
 import { TextSettings } from '~/features/editor/components/TextSettings';
@@ -49,16 +47,6 @@ const editSections = [
 export function Drawer({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDivElement | null> }) {
   const { setDrawerOpen, openSection, setOpenSection } = useEditorUIStore();
   const { resetEditor } = useEditor();
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const { width } = useViewportSize();
-
-  useEffect(() => {
-    const isMobile = width < 992;
-
-    if (!isMobile && scrollAreaRef.current) {
-      scrollAreaRef.current.scrollTo({ top: 0, behavior: 'instant' });
-    }
-  }, [openSection]);
 
   const openSectionIndex = editSections.findIndex((section) => section.id === openSection);
 
@@ -112,9 +100,7 @@ export function Drawer({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDiv
           </Stack>
         </Tabs.List>
 
-        <ScrollArea flex={1} viewportRef={scrollAreaRef} h="calc(100vh - 69px - 60px - 55px)" px="sm">
-          <Tabs.Panel value={openSection}>{editSections[openSectionIndex].content()}</Tabs.Panel>
-        </ScrollArea>
+        <Tabs.Panel value={openSection}>{editSections[openSectionIndex].content()}</Tabs.Panel>
       </Tabs>
       <Flex direction="column" hiddenFrom="md" variant="none">
         <Flex
