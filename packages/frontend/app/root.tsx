@@ -218,7 +218,11 @@ export function HydrateFallback() {
   return (
     <MantineProvider>
       <Navbar />
-      <Box component="main" style={{ minHeight: 'calc(100vh - 69px)' }} className={classes['themed-bg']} />
+      <Box
+        component="main"
+        style={{ minHeight: 'calc(100vh - var(--main-header-height))' }}
+        className={classes['themed-bg']}
+      />
     </MantineProvider>
   );
 }
