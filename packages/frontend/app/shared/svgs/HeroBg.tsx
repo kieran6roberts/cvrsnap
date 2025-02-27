@@ -1,13 +1,13 @@
 export const HeroBg = () => {
   return (
-   <svg preserveAspectRatio="none" viewBox="0 0 1440 560" xmlns="http://www.w3.org/2000/svg">
-    <g mask="url(&quot;#SvgjsMask1010&quot;)" fill="none">
+    <svg preserveAspectRatio="none" viewBox="0 0 1440 560">
+      <g mask='url("#SvgjsMask1010")' fill="none">
         <use xlinkHref="#SvgjsSymbol1017" x="0" y="0"></use>
         <use xlinkHref="#SvgjsSymbol1017" x="720" y="0"></use>
-    </g>
-    <defs>
+      </g>
+      <defs>
         <mask id="SvgjsMask1010">
-            <rect width="1440" height="560" fill="#ffffff"></rect>
+          <rect width="1440" height="560" fill="#ffffff"></rect>
         </mask>
         <path d="M-1 0 a1 1 0 1 0 2 0 a1 1 0 1 0 -2 0z" id="SvgjsPath1013"></path>
         <path d="M-3 0 a3 3 0 1 0 6 0 a3 3 0 1 0 -6 0z" id="SvgjsPath1014"></path>
@@ -15,8 +15,8 @@ export const HeroBg = () => {
         <path d="M2 -2 L-2 2z" id="SvgjsPath1016"></path>
         <path d="M6 -6 L-6 6z" id="SvgjsPath1011"></path>
         <path d="M30 -30 L-30 30z" id="SvgjsPath1015"></path>
-    </defs>
-    <symbol id="SvgjsSymbol1017">
+      </defs>
+      <symbol id="SvgjsSymbol1017">
         <use xlinkHref="#SvgjsPath1011" x="30" y="30" stroke="rgba(131, 59, 219, 0.2)"></use>
         <use xlinkHref="#SvgjsPath1012" x="30" y="90" stroke="rgba(131, 59, 219, 0.2)"></use>
         <use xlinkHref="#SvgjsPath1012" x="30" y="150" stroke="rgba(131, 59, 219, 0.2)"></use>
@@ -136,7 +136,7 @@ export const HeroBg = () => {
         <use xlinkHref="#SvgjsPath1011" x="690" y="450" stroke="rgba(131, 59, 219, 0.2)"></use>
         <use xlinkHref="#SvgjsPath1011" x="690" y="510" stroke="rgba(131, 59, 219, 0.2)"></use>
         <use xlinkHref="#SvgjsPath1012" x="690" y="570" stroke="rgba(131, 59, 219, 0.2)"></use>
-    </symbol>
-</svg>
+      </symbol>
+    </svg>
   );
 };

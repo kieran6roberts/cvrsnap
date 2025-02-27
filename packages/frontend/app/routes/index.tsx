@@ -46,7 +46,15 @@ export default function Index() {
                 and take away the cover image design burden
               </Title>
 
-              <Text fz={{ base: 'sm', sm: 'lg' }} fw={500} ta="center" maw={{ base: 525, sm: 660 }} mx="auto" mt="md" style={{ zIndex: 1 }}>
+              <Text
+                fz={{ base: 'sm', sm: 'lg' }}
+                fw={500}
+                ta="center"
+                maw={{ base: 525, sm: 660 }}
+                mx="auto"
+                mt="md"
+                style={{ zIndex: 1 }}
+              >
                 Most blog posts need a good cover image and {SITE_NAME} empowers you to create great looking blog cover
                 images in seconds using templates and simple editing tools. It's completely free to download as many
                 images as you like.
@@ -83,7 +91,7 @@ export default function Index() {
                 border: '1px solid var(--mantine-color-default-border)',
                 borderRadius: 'var(--mantine-radius-md)',
                 boxShadow: 'var(--mantine-shadow-sm)',
-                zIndex: 1,
+                zIndex: 1
               }}
               h="100%"
               w="100%"
@@ -130,8 +138,8 @@ export default function Index() {
                 </List.Item>
                 <List.Item>
                   <Text fz={{ base: 'sm', sm: 'lg' }}>
-                    You don't want to spend hours starting from scratch. You just want to pick some background preset templates and colors,
-                    maybe change some font settings and add your text.
+                    You don't want to spend hours starting from scratch. You just want to pick some background preset
+                    templates and colors, maybe change some font settings and add your text.
                   </Text>
                 </List.Item>
                 <List.Item>
