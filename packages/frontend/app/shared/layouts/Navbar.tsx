@@ -21,7 +21,7 @@ export function Navbar() {
           style={{ textDecoration: 'none' }}
           viewTransition
         >
-          <Image src="/favicon.ico" width={36} height={36} alt={`${SITE_NAME} logo`} />
+          <Image src="/favicon.ico" width={32} height={32} alt={`${SITE_NAME} logo`} />
           <Text component="span" size="lg" fw={500}>
             {SITE_NAME}
           </Text>

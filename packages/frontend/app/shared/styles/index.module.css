@@ -1,4 +1,5 @@
 .themed-bg {
+  position: relative;
   background-color: white;
 
   [data-mantine-color-scheme='dark'] & {

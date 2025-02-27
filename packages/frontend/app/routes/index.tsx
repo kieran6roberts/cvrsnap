@@ -9,6 +9,7 @@ import editorDark from '~/images/editor-dark.webp';
 import { SITE_NAME } from '~/config/consts';
 import { Navbar } from '~/shared/layouts/Navbar';
 import classes from '~/shared/styles/index.module.css';
+import { HeroBg } from '~/shared/svgs/HeroBg';
 
 export const meta: MetaFunction = () => {
   const title = `${SITE_NAME} - Get your free blog post cover images.`;
@@ -22,13 +23,16 @@ export default function Index() {
     <>
       <Navbar />
       <Box className={classes['themed-bg']}>
-        <Container component="main" size="xl">
+        <Box component="div" pos="absolute" top={0} left={0} right={0} bottom={0} style={{ zIndex: 0 }} h="max-content">
+          <HeroBg />
+        </Box>
+        <Container component="main" size="xl" style={{ zIndex: 10 }}>
           <Flex direction="column" gap="xl" align="center" pt={{ base: 80, sm: 100 }}>
             <Stack justify="center" gap="xs">
               <Title
                 ta="center"
                 order={1}
-                fz={{ base: '2.2rem', sm: '4.5rem' }}
+                fz={{ base: '2.2rem', sm: '3.8rem' }}
                 style={{ lineHeight: '1', zIndex: 1 }}
                 fw={700}
                 aria-label={SITE_NAME}
@@ -36,23 +40,23 @@ export default function Index() {
                 mx="auto"
               >
                 Publish blog posts{' '}
-                <Mark fz="0.95em" style={{ zIndex: -1 }} color="yellow">
+                <Mark fz="0.95em" style={{ zIndex: -1 }} color="pink">
                   faster
                 </Mark>{' '}
                 and take away the cover image design burden
               </Title>
 
-              <Text fz={{ base: 'sm', sm: 'lg' }} fw={500} ta="center" maw={660} mx="auto" mt="md">
+              <Text fz={{ base: 'sm', sm: 'lg' }} fw={500} ta="center" maw={{ base: 525, sm: 660 }} mx="auto" mt="md" style={{ zIndex: 1 }}>
                 Most blog posts need a good cover image and {SITE_NAME} empowers you to create great looking blog cover
                 images in seconds using templates and simple editing tools. It's completely free to download as many
                 images as you like.
               </Text>
-              <Flex direction={{ base: 'column', sm: 'row' }} justify="center" align="center" gap="md" mt="xl">
+              <Flex direction={{ base: 'column', xs: 'row' }} justify="center" align="center" gap="md" mt="xl">
                 <Button
                   hiddenFrom="sm"
                   component={Link}
                   to="/create"
-                  size="lg"
+                  size="md"
                   variant="gradient"
                   gradient={{ from: 'grape', to: 'violet', deg: 135 }}
                   viewTransition
@@ -63,22 +67,23 @@ export default function Index() {
                   visibleFrom="sm"
                   component={Link}
                   to="/create"
-                  size="lg"
+                  size="md"
                   variant="gradient"
                   gradient={{ from: 'grape', to: 'violet', deg: 135 }}
                   viewTransition
                 >
                   Build for free
                 </Button>
-                <GitHubStarButton hiddenFrom="sm" size="lg" variant="outline" />
-                <GitHubStarButton visibleFrom="sm" size="lg" variant="outline" />
+                <GitHubStarButton hiddenFrom="sm" size="md" variant="light" />
+                <GitHubStarButton visibleFrom="sm" size="md" variant="light" />
               </Flex>
             </Stack>
             <Box
               style={{
                 border: '1px solid var(--mantine-color-default-border)',
                 borderRadius: 'var(--mantine-radius-md)',
-                boxShadow: 'var(--mantine-shadow-sm)'
+                boxShadow: 'var(--mantine-shadow-sm)',
+                zIndex: 1,
               }}
               h="100%"
               w="100%"
@@ -99,7 +104,7 @@ export default function Index() {
             </Box>
             <Flex component="section" direction="column" gap="md" mb={40}>
               <Title order={2} fz={{ base: '1.5rem', sm: '2rem' }} ta="center">
-                Whos is CvrSnap for?
+                Who is CvrSnap for?
               </Title>
               <List
                 maw={650}
@@ -125,8 +130,8 @@ export default function Index() {
                 </List.Item>
                 <List.Item>
                   <Text fz={{ base: 'sm', sm: 'lg' }}>
-                    You don't want to spend hours starting from sratch. You just want to pick some preset templates,
-                    maybe change some font settings etc.
+                    You don't want to spend hours starting from scratch. You just want to pick some background preset templates and colors,
+                    maybe change some font settings and add your text.
                   </Text>
                 </List.Item>
                 <List.Item>
