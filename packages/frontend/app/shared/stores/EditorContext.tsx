@@ -231,6 +231,7 @@ export const useEditor = create(
 
         await indexDBStorage.removeItem('editor-storage');
 
+        // Small timeout to prevent unpleasant flash of style changes
         setTimeout(() => {
           set({
             _hasHydrated: true,
@@ -289,47 +290,49 @@ export const useEditor = create(
 export function EditorHydration({ children, skeleton }: { children: React.ReactNode; skeleton?: React.ReactNode }) {
   const hasHydrated = useEditor((state) => state._hasHydrated);
 
-  useEffect(() => {
-    if (hasHydrated) {
-      const state = useEditor.getState();
-      const layoutTemplate = LAYOUT_TEMPLATES.find((t) => t.id === state.template.layoutId);
-      // const backgroundTemplate = BACKGROUND_TEMPLATES.find((t) => t.id === state.template.backgroundId);
-
-      updateCSSVariables({
-        /* Cover Primary Text */
-        '--cover-primary-text-color': state.primaryText.color,
-        '--cover-primary-text-font-size': `${state.primaryText.fontSize}px`,
-        '--cover-primary-text-font': state.primaryText.font,
-
-        /* Cover Secondary Text */
-        '--cover-secondary-text-color': state.secondaryText.color,
-        '--cover-secondary-text-font-size': `${state.secondaryText.fontSize}px`,
-        '--cover-secondary-text-font': state.secondaryText.font,
-
-        /* 
-          Cover Background (overlay)
-
-          Note: For now the image & bg opacity is not persisted.
-         */
-        '--cover-background-color-1': state.background.colors?.color1 ?? 'rgba(81, 133, 196, 1)',
-        '--cover-background-color-2': state.background.colors?.color2 ?? 'rgba(51, 51, 51, 1)',
-        '--cover-background-color-3': state.background.colors?.color3 ?? 'rgba(51, 51, 51, 1)',
-        '--cover-background-color-4': state.background.colors?.color4 ?? 'rgba(51, 51, 51, 1)',
-        /*
-        '--cover-align-items
-        '--cover-primary-text-align
-        '--cover-secondary-position
-        '--cover-secondary-bottom
-        '--cover-secondary-right
-        '--cover-secondary-left
-        '--cover-secondary-text-align
-        */
-        ...layoutTemplate?.styles,
-        /* Cover Aspect Ratio */
-        '--cover-aspect-ratio': `${(state.cover.width / state.cover.height).toFixed(1)}`
-      });
+  const rehydrateEditor = () => {
+    if (!hasHydrated) {
+      return;
     }
-  }, [hasHydrated]);
+    const state = useEditor.getState();
+    const layoutTemplate = LAYOUT_TEMPLATES.find((t) => t.id === state.template.layoutId);
+
+    updateCSSVariables({
+      /* Cover Primary Text */
+      '--cover-primary-text-color': state.primaryText.color,
+      '--cover-primary-text-font-size': `${state.primaryText.fontSize}px`,
+      '--cover-primary-text-font': state.primaryText.font,
+
+      /* Cover Secondary Text */
+      '--cover-secondary-text-color': state.secondaryText.color,
+      '--cover-secondary-text-font-size': `${state.secondaryText.fontSize}px`,
+      '--cover-secondary-text-font': state.secondaryText.font,
+
+      /* 
+        Cover Background (overlay)
+
+        Note: For now the image & bg opacity is not persisted.
+       */
+      '--cover-background-color-1': state.background.colors?.color1 ?? 'rgba(81, 133, 196, 1)',
+      '--cover-background-color-2': state.background.colors?.color2 ?? 'rgba(51, 51, 51, 1)',
+      '--cover-background-color-3': state.background.colors?.color3 ?? 'rgba(51, 51, 51, 1)',
+      '--cover-background-color-4': state.background.colors?.color4 ?? 'rgba(51, 51, 51, 1)',
+      /*
+      '--cover-align-items
+      '--cover-primary-text-align
+      '--cover-secondary-position
+      '--cover-secondary-bottom
+      '--cover-secondary-right
+      '--cover-secondary-left
+      '--cover-secondary-text-align
+      */
+      ...layoutTemplate?.styles,
+      /* Cover Aspect Ratio */
+      '--cover-aspect-ratio': `${(state.cover.width / state.cover.height).toFixed(1)}`
+    });
+  };
+
+  useEffect(rehydrateEditor, [hasHydrated]);
 
   if (!hasHydrated) {
     return skeleton ?? null;

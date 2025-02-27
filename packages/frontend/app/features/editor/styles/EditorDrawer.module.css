@@ -4,7 +4,7 @@
   background-color: var(--mantine-color-light-1);
 
   @media (min-width: em(992px)) {
-    height: calc(100vh - 69px);
+    height: calc(100vh - var(--main-header-height));
     width: 440px;
     border-right: 1px solid var(--mantine-color-default-border);
   }
