@@ -24,7 +24,7 @@ export const meta: MetaFunction = () => {
 const CvrSnapScreenshot = ({ src, alt }: { src: string; alt: string }) => {
   return (
     <article className={classes['landing-examples--container']}>
-      <img src={src} alt={alt} width={300} className={classes['landing-examples--image']} />
+      <img src={src} alt={alt} width={300} height={178} className={classes['landing-examples--image']} />
     </article>
   );
 };

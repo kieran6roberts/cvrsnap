@@ -12,7 +12,7 @@ export function Footer() {
       <div className={classes['footer-content']}>
         <div className={classes['footer-content--links']}>
           <ul className={classes['footer-content--links-list']}>
-            <span className={classes['footer-content--links-header']}>{SITE_NAME}</span>
+            <li className={classes['footer-content--links-header']}>{SITE_NAME}</li>
             <li className={classes['footer-content--links-item']}>
               <Link className={classes['footer-content--links-link']} to={CREATE_ROUTE}>
                 Editor
@@ -25,7 +25,7 @@ export function Footer() {
             </li>
           </ul>
           <ul className={classes['footer-content--links-list']}>
-            <span className={classes['footer-content--links-header']}>Blog</span>
+            <li className={classes['footer-content--links-header']}>Blog</li>
             <li className={classes['footer-content--links-item']}>
               <Link
                 className={classes['footer-content--links-link']}
@@ -38,7 +38,6 @@ export function Footer() {
             </li>
           </ul>
         </div>
-
         <Logo />
       </div>
     </footer>

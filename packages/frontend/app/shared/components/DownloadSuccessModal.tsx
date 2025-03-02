@@ -35,7 +35,10 @@ export function DownloadSuccessModal({ close }: { close: () => void }) {
 
         <Flex justify="center" align="center" gap="md">
           <GitHubStarButton size="sm" variant="outline" />
-          <Button size="sm" variant="filled" onClick={close}>
+          <Button size="sm" variant="filled" darkHidden onClick={close}>
+            Keep building
+          </Button>
+          <Button size="sm" variant="white" lightHidden onClick={close}>
             Keep building
           </Button>
         </Flex>

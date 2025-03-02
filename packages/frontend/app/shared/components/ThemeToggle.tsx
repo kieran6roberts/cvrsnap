@@ -10,7 +10,7 @@ const iconSizeMap = {
   sm: 12,
   md: 16,
   lg: 20,
-  xl: 22
+  xl: 24
 };
 
 export function ThemeToggle({ size = 'md' }: ThemeToggleProps) {

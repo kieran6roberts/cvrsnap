@@ -50,8 +50,7 @@ const theme = createTheme({
         },
         legend: {
           fontSize: 'var(--mantine-font-size-lg)',
-          fontWeight: 500,
-          opacity: 0.6
+          fontWeight: 500
         }
       }
     },
