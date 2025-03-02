@@ -2,21 +2,32 @@ import { ActionIcon, Center, useMantineColorScheme } from '@mantine/core';
 import { SunLight, HalfMoon } from 'iconoir-react';
 import { SITE_THEMES } from '~/config/consts';
 
-export function ThemeToggle() {
+interface ThemeToggleProps {
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+}
+
+const iconSizeMap = {
+  sm: 12,
+  md: 16,
+  lg: 20,
+  xl: 24
+};
+
+export function ThemeToggle({ size = 'md' }: ThemeToggleProps) {
   const { colorScheme, setColorScheme } = useMantineColorScheme();
 
   return (
     <ActionIcon
       onClick={() => setColorScheme(colorScheme === SITE_THEMES.light ? SITE_THEMES.dark : SITE_THEMES.light)}
-      variant="default"
-      size={40}
+      variant="subtle"
+      size={size}
       aria-label="Toggle color scheme"
     >
       <Center darkHidden h="100%" w="100%">
-        <SunLight width={20} height={20} color="var(--mantine-color-text)" />
+        <SunLight width={iconSizeMap[size]} height={iconSizeMap[size]} color="var(--mantine-color-text)" />
       </Center>
       <Center lightHidden h="100%" w="100%">
-        <HalfMoon width={20} height={20} color="var(--mantine-color-text)" />
+        <HalfMoon width={iconSizeMap[size]} height={iconSizeMap[size]} color="var(--mantine-color-text)" />
       </Center>
     </ActionIcon>
   );

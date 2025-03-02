@@ -1,14 +1,16 @@
 import { Box, Flex, Image, Text, Button } from '@mantine/core';
-import { Link } from 'react-router';
+import { Link, useLocation } from 'react-router';
 
 import { ThemeToggle } from '~/shared/components/ThemeToggle';
 import { GitHubStarButton } from '~/shared/components/GitHubStarButton';
 import { MobileGithubButton } from '~/shared/components/MobileGitHubButton';
-import { SITE_NAME } from '~/config/consts';
+import { SITE_NAME, CREATE_ROUTE } from '~/config/consts';
 
 import classes from './styles/Navbar.module.css';
 
 export function Navbar() {
+  const { pathname } = useLocation();
+  const isEditorPage = pathname === CREATE_ROUTE;
   return (
     <Box component="header" w="100%" className={classes['main-header']}>
       <Flex component="nav" justify="space-between" align="center" h="100%" w="100%" px="lg">
@@ -30,12 +32,14 @@ export function Navbar() {
         <Flex gap="lg" align="center">
           <Flex gap="xs" align="center">
             <GitHubStarButton visibleFrom="md" size="sm" variant="outline" />
-            <Button component={Link} to="/create" size="sm" viewTransition>
-              Editor
-            </Button>
+            {!isEditorPage ? (
+              <Button component={Link} to="/create" size="sm" viewTransition>
+                Editor
+              </Button>
+            ) : null}
           </Flex>
           <MobileGithubButton />
-          <ThemeToggle />
+          <ThemeToggle size="xl" />
         </Flex>
       </Flex>
     </Box>
