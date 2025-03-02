@@ -66,13 +66,10 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
         <Button hiddenFrom="md" onClick={resetEditor} variant="outline" size="sm">
           Reset all
         </Button>
-        <Button
-          hiddenFrom="md"
-          variant="gradient"
-          gradient={{ from: 'grape', to: 'violet', deg: 135 }}
-          onClick={open}
-          size="sm"
-        >
+        <Button hiddenFrom="md" darkHidden variant="primary" onClick={open} size="sm">
+          Preview/Save
+        </Button>
+        <Button hiddenFrom="md" variant="white" lightHidden onClick={open} size="sm">
           Preview/Save
         </Button>
 
@@ -107,9 +104,23 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
 
               <Button
                 className="plausible-event-name=Download+Image"
-                variant="gradient"
+                variant="primary"
                 w="100%"
-                gradient={{ from: 'grape', to: 'violet', deg: 135 }}
+                hiddenFrom="md"
+                darkHidden
+                onClick={onDownloadImage}
+                size="md"
+                rightSection={<Download width={24} height={24} />}
+                mt="auto"
+              >
+                <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
+                Save image
+              </Button>
+              <Button
+                className="plausible-event-name=Download+Image"
+                variant="white"
+                lightHidden
+                w="100%"
                 hiddenFrom="md"
                 onClick={onDownloadImage}
                 size="md"

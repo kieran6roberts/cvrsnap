@@ -23,17 +23,12 @@
   }
 
   &-controls {
-    background-color: white;
     z-index: 50;
     border-bottom: 1px solid var(--mantine-color-default-border);
 
     @media (min-width: em(992px)) {
       border-right: 1px solid var(--mantine-color-default-border);
       border-bottom: none;
-    }
-
-    [data-mantine-color-scheme='dark'] & {
-      background-color: var(--mantine-color-dark-9);
     }
   }
 

@@ -4,11 +4,15 @@ import { Github } from 'iconoir-react';
 
 import { GITHUB_URL } from '~/config/consts';
 
-export function GitHubStarButton({ ...props }: ButtonProps) {
+interface GitHubStarButtonProps extends ButtonProps {
+  copy?: string;
+}
+
+export function GitHubStarButton({ copy = 'Github', ...props }: GitHubStarButtonProps) {
   return (
     <Button component={Link} target="_blank" to={GITHUB_URL} {...props}>
       <Flex align="center" gap="xs">
-        <Github width={20} /> GitHub
+        <Github width={16} /> {copy}
       </Flex>
     </Button>
   );

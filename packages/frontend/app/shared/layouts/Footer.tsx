@@ -1,20 +1,45 @@
-import { Anchor, Box, Container, Stack, Text } from '@mantine/core';
+import { Link } from 'react-router';
 
-import { GITHUB_URL, SITE_NAME } from '~/config/consts';
+import classes from './styles/Footer.module.css';
+import { Logo } from '~/shared/components/Logo';
+import { GridBackground } from '~/shared/components/GridBackground';
+import { GITHUB_URL, SITE_NAME, CREATE_ROUTE, SITE_CASE_STUDY_URL } from '~/config/consts';
 
 export function Footer() {
   return (
-    <Box component="footer" w="100%" py="xl">
-      <Container size="xl">
-        <Stack gap="xs" justify="center" align="center">
-          <Text ta="center" size="sm">
-            {SITE_NAME} on{' '}
-            <Anchor href={GITHUB_URL} underline="always" target="_blank">
-              GitHub
-            </Anchor>
-          </Text>
-        </Stack>
-      </Container>
-    </Box>
+    <footer className={classes['footer']}>
+      <GridBackground />
+      <div className={classes['footer-content']}>
+        <div className={classes['footer-content--links']}>
+          <ul className={classes['footer-content--links-list']}>
+            <li className={classes['footer-content--links-header']}>{SITE_NAME}</li>
+            <li className={classes['footer-content--links-item']}>
+              <Link className={classes['footer-content--links-link']} to={CREATE_ROUTE}>
+                Editor
+              </Link>
+            </li>
+            <li className={classes['footer-content--links-item']}>
+              <Link className={classes['footer-content--links-link']} to={GITHUB_URL} target="_blank" rel="noreferrer">
+                GitHub
+              </Link>
+            </li>
+          </ul>
+          <ul className={classes['footer-content--links-list']}>
+            <li className={classes['footer-content--links-header']}>Blog</li>
+            <li className={classes['footer-content--links-item']}>
+              <Link
+                className={classes['footer-content--links-link']}
+                to={SITE_CASE_STUDY_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Making of CvrSnap
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <Logo />
+      </div>
+    </footer>
   );
 }

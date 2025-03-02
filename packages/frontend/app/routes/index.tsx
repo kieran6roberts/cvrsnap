@@ -1,158 +1,113 @@
 import type { MetaFunction } from 'react-router';
-import { Container, Title, Text, Flex, Stack, Button, Box, Image, Mark, List, ThemeIcon } from '@mantine/core';
+import { Container, Title, Text, Flex, Stack, Button, Badge } from '@mantine/core';
 import { Link } from 'react-router';
-import { CheckCircleSolid } from 'iconoir-react';
+import { ArrowUpRight, MapsArrowDiagonal, CheckCircle } from 'iconoir-react';
 
+import { ThemeToggle } from '~/shared/components/ThemeToggle';
 import { Footer } from '~/shared/layouts/Footer';
 import { GitHubStarButton } from '~/shared/components/GitHubStarButton';
-import editorDark from '~/images/editor-dark.webp';
-import { SITE_NAME } from '~/config/consts';
-import { Navbar } from '~/shared/layouts/Navbar';
+import { SITE_NAME, SITE_CASE_STUDY_URL } from '~/config/consts';
 import classes from '~/shared/styles/index.module.css';
-import { HeroBg } from '~/shared/svgs/HeroBg';
+import LandingExample1 from '~/images/landing-example-1.webp';
+import LandingExample2 from '~/images/landing-example-2.webp';
+import LandingExample3 from '~/images/landing-example-3.webp';
+import LandingExample4 from '~/images/landing-example-4.webp';
+import { GridBackground } from '~/shared/components/GridBackground';
 
 export const meta: MetaFunction = () => {
-  const title = `${SITE_NAME} - Get your free blog post cover images.`;
-  const description = `Most blog posts need a good cover image. ${SITE_NAME} empowers you to create great looking blog cover images in seconds using templates and simple editing tools. It's completely free to download as many cover images as you like.`;
+  const title = `${SITE_NAME} - Effortless Blog Cover Design Tool`;
+  const description = `A great blog post needs a great cover. ${SITE_NAME} helps you create stunning blog cover images in seconds with easy-to-use templates and editing tools. It's completely free to download as many cover images as you like.`;
 
   return [{ title, description }];
+};
+
+const CvrSnapScreenshot = ({ src, alt }: { src: string; alt: string }) => {
+  return (
+    <article className={classes['landing-examples--container']}>
+      <img src={src} alt={alt} width={300} height={178} className={classes['landing-examples--image']} />
+    </article>
+  );
 };
 
 export default function Index() {
   return (
     <>
-      <Navbar />
-      <Box className={classes['themed-bg']}>
-        <Box component="div" pos="absolute" top={0} left={0} right={0} bottom={0} style={{ zIndex: 0 }} h="max-content">
-          <HeroBg />
-        </Box>
-        <Container component="main" size="xl" style={{ zIndex: 10 }}>
-          <Flex direction="column" gap="xl" align="center" pt={{ base: 80, sm: 100 }}>
-            <Stack justify="center" gap="xs">
-              <Title
-                ta="center"
-                order={1}
-                fz={{ base: '2.2rem', sm: '3.8rem' }}
-                style={{ lineHeight: '1', zIndex: 1 }}
-                fw={700}
-                aria-label={SITE_NAME}
-                maw={{ base: 500, sm: 800 }}
-                mx="auto"
+      <Container component="main" className={classes['themed-bg']} size="xl">
+        <section className={classes['landing-section']}>
+          <GridBackground />
+          <Flex className={classes['hero-section']} direction={{ base: 'column', lg: 'row' }} gap="xl">
+            <Stack gap="lg" className={classes['hero-section-content']}>
+              <div className={classes['hero-section-content--theme-container']}>
+                <ThemeToggle size="lg" />
+              </div>
+              <Link
+                to={SITE_CASE_STUDY_URL}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Read about CvrSnap and how it was built"
               >
-                Publish blog posts{' '}
-                <Mark fz="0.95em" style={{ zIndex: -1 }} color="pink">
-                  faster
-                </Mark>{' '}
-                and take away the cover image design burden
+                <Badge
+                  className={classes['hero-section-content--badge']}
+                  variant="filled"
+                  rightSection={<ArrowUpRight width={12} height={12} />}
+                >
+                  Read about CvrSnap
+                </Badge>
+              </Link>
+              <Title
+                order={1}
+                aria-label={`${SITE_NAME} - Effortless Blog Cover Design`}
+                className={classes['hero-section-content--title']}
+              >
+                Effortless Blog Cover Design with {SITE_NAME}
               </Title>
 
-              <Text
-                fz={{ base: 'sm', sm: 'lg' }}
-                fw={500}
-                ta="center"
-                maw={{ base: 525, sm: 660 }}
-                mx="auto"
-                mt="md"
-                style={{ zIndex: 1 }}
-              >
-                Most blog posts need a good cover image and {SITE_NAME} empowers you to create great looking blog cover
-                images in seconds using templates and simple editing tools. It's completely free to download as many
-                images as you like.
+              <Text className={classes['hero-section-content--copy']} fz={{ base: 'md', sm: 'lg' }}>
+                A great blog post needs a great cover. CvrSnap helps you create stunning blog cover images in seconds
+                with easy-to-use templates and editing tools.
               </Text>
-              <Flex direction={{ base: 'column', xs: 'row' }} justify="center" align="center" gap="md" mt="xl">
+              <Flex direction={{ base: 'column', xs: 'row' }} gap="md">
                 <Button
-                  hiddenFrom="sm"
+                  fullWidth
+                  darkHidden
                   component={Link}
                   to="/create"
                   size="md"
-                  variant="gradient"
-                  gradient={{ from: 'grape', to: 'violet', deg: 135 }}
+                  variant="primary"
+                  rightSection={<MapsArrowDiagonal width={16} height={16} />}
                   viewTransition
                 >
                   Build for free
                 </Button>
                 <Button
-                  visibleFrom="sm"
+                  fullWidth
+                  lightHidden
                   component={Link}
                   to="/create"
                   size="md"
-                  variant="gradient"
-                  gradient={{ from: 'grape', to: 'violet', deg: 135 }}
+                  variant="white"
+                  rightSection={<MapsArrowDiagonal width={16} height={16} />}
                   viewTransition
                 >
                   Build for free
                 </Button>
-                <GitHubStarButton hiddenFrom="sm" size="md" variant="light" />
-                <GitHubStarButton visibleFrom="sm" size="md" variant="light" />
+                <GitHubStarButton fullWidth size="md" variant="outline" copy="GitHub" />
+              </Flex>
+              <Flex align="center" justify="center" gap="xs">
+                <CheckCircle width={24} height={24} opacity={0.9} />
+                <p className={classes['hero-section-content--message']}>Save unlimited images for free.</p>
               </Flex>
             </Stack>
-            <Box
-              style={{
-                border: '1px solid var(--mantine-color-default-border)',
-                borderRadius: 'var(--mantine-radius-md)',
-                boxShadow: 'var(--mantine-shadow-sm)',
-                zIndex: 1
-              }}
-              h="100%"
-              w="100%"
-              mah="700px"
-              maw="1200px"
-              mt="xl"
-              mb={{ base: 50, sm: 100 }}
-            >
-              <Image
-                src={editorDark}
-                alt={`${SITE_NAME} create page screenshot`}
-                radius="md"
-                loading="eager"
-                w="100%"
-                style={{ aspectRatio: '16/9' }}
-                bg="var(--mantine-color-dark-9)"
-              />
-            </Box>
-            <Flex component="section" direction="column" gap="md" mb={40}>
-              <Title order={2} fz={{ base: '1.5rem', sm: '2rem' }} ta="center">
-                Who is CvrSnap for?
-              </Title>
-              <List
-                maw={650}
-                mx="auto"
-                spacing="md"
-                center
-                icon={
-                  <ThemeIcon color="green" size={24} radius="xl">
-                    <CheckCircleSolid width={16} height={16} color="white" />
-                  </ThemeIcon>
-                }
-              >
-                <List.Item>
-                  <Text fz={{ base: 'sm', sm: 'lg' }}>
-                    Someone who needs a simple good looking blog cover image with text as the highlight, usually for the
-                    blog title and author.
-                  </Text>
-                </List.Item>
-                <List.Item>
-                  <Text fz={{ base: 'sm', sm: 'lg' }}>
-                    You don't want a cover image from an internet image platform.
-                  </Text>
-                </List.Item>
-                <List.Item>
-                  <Text fz={{ base: 'sm', sm: 'lg' }}>
-                    You don't want to spend hours starting from scratch. You just want to pick some background preset
-                    templates and colors, maybe change some font settings and add your text.
-                  </Text>
-                </List.Item>
-                <List.Item>
-                  <Text fz={{ base: 'sm', sm: 'lg' }}>
-                    You want to do all of this in a modern and user-friendly editor.
-                  </Text>
-                </List.Item>
-              </List>
-            </Flex>
           </Flex>
-        </Container>
-        <Footer />
-      </Box>
+          <section className={classes['landing-examples']}>
+            <CvrSnapScreenshot src={LandingExample1} alt="Example 1 - CvrSnap cover image" />
+            <CvrSnapScreenshot src={LandingExample2} alt="Example 2 - CvrSnap cover image" />
+            <CvrSnapScreenshot src={LandingExample3} alt="Example 3 - CvrSnap cover image" />
+            <CvrSnapScreenshot src={LandingExample4} alt="Example 4 - CvrSnap cover image" />
+          </section>
+        </section>
+      </Container>
+      <Footer />
     </>
   );
 }
