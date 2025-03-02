@@ -4,7 +4,6 @@ import type { LinksFunction } from 'react-router';
 import { Box, ColorSchemeScript, MantineProvider, createTheme, mantineHtmlProps } from '@mantine/core';
 import { ToastProvider } from '~/shared/providers/ToastProvider';
 import { DOMAIN, SITE_NAME } from '~/config/consts';
-import { Navbar } from './shared/layouts/Navbar';
 import classes from '~/shared/styles/index.module.css';
 
 export const links: LinksFunction = () => [
@@ -31,8 +30,8 @@ export const links: LinksFunction = () => [
 const theme = createTheme({
   autoContrast: true,
   luminanceThreshold: 0.3,
-  primaryColor: 'grape',
-  primaryShade: 7,
+  primaryShade: 9,
+  primaryColor: 'gray',
   components: {
     InputLabel: {
       defaultProps: {
@@ -150,10 +149,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content={`${SITE_NAME} - Get your free blog post cover images.`} />
+        <meta property="og:title" content={`${SITE_NAME} - Effortless Blog Cover Design`} />
         <meta
           property="og:description"
-          content={`Most blog posts need a good cover image. ${SITE_NAME} empowers you to create great looking blog cover images in seconds using templates and simple editing tools. It's completely free to download as many cover images as you like.`}
+          content={`A great blog post needs a great cover. ${SITE_NAME} helps you create stunning blog cover images in seconds with easy-to-use templates and editing tools. It's completely free to download as many cover images as you like.`}
         />
         <meta property="og:image" content={`https://${DOMAIN}/og-img.png?v=3`} />
         <meta property="og:image:alt" content="CvrSnap - Create blog post cover images in seconds" />
@@ -174,7 +173,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <script defer data-domain={DOMAIN} data-api="/api/event" src="/js/script.tagged-events.js"></script>
         ) : null}
       </head>
-      <body>
+      <body className={classes['themed-bg']}>
         <MantineProvider theme={theme}>{children}</MantineProvider>
         <ToastProvider />
         <ScrollRestoration />
@@ -217,7 +216,6 @@ export function ErrorBoundary() {
 export function HydrateFallback() {
   return (
     <MantineProvider>
-      <Navbar />
       <Box
         component="main"
         style={{ minHeight: 'calc(100vh - var(--main-header-height))' }}

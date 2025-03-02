@@ -1,8 +1,102 @@
 .themed-bg {
   position: relative;
-  background-color: white;
+  background-color: var(--mantine-color-gray-0);
 
   [data-mantine-color-scheme='dark'] & {
-    background-color: var(--mantine-color-dark-9);
+    background-color: #0a0a08;
+  }
+}
+
+.landing-section {
+  position: relative;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+
+  [data-mantine-color-scheme='dark'] & {
+    border-bottom: 1px solid var(--mantine-color-dark-6);
+  }
+}
+
+.hero-section {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  padding: 50px 20px 0px 20px;
+
+  @media (min-width: 768px) {
+    padding: 50px 55px 0px 55px;
+  }
+
+  &-content {
+    text-align: center;
+
+    &--badge {
+      cursor: pointer;
+      text-transform: none;
+    }
+
+    &--theme-container {
+      align-self: center;
+    }
+
+    &--title {
+      color: var(--mantine-color-gray-4);
+      line-height: 1;
+      max-width: 450px;
+      font-size: 2.8rem;
+      align-self: center;
+
+      @media (min-width: 768px) {
+        max-width: 650px;
+        font-size: 3.8rem;
+      }
+
+      [data-mantine-color-scheme='dark'] & {
+        color: var(--mantine-color-gray-3);
+      }
+    }
+
+    &--copy {
+      align-self: center;
+      color: var(--mantine-color-gray-6);
+      max-width: 490px;
+      font-weight: 500;
+
+      [data-mantine-color-scheme='dark'] & {
+        color: var(--mantine-color-gray-7);
+      }
+    }
+
+    &--message {
+      color: var(--mantine-color-customDark-6);
+      opacity: 0.9;
+      text-align: center;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-top: 1rem;
+
+      [data-mantine-color-scheme='dark'] & {
+        color: var(--mantine-color-customDark-1);
+      }
+    }
+  }
+}
+
+/* Landing examples */
+.landing-examples {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  z-index: 1;
+  margin-top: 2rem;
+
+  &--image {
+    object-fit: cover;
+    box-shadow: var(--mantine-shadow-sm);
+    border-radius: var(--mantine-radius-lg);
   }
 }
