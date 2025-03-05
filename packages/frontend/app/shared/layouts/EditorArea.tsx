@@ -17,7 +17,7 @@ export function EditorArea() {
   return (
     <Flex
       direction={{ base: 'column-reverse', md: 'row' }}
-      justify="center"
+      // p={{ base: '0.4rem', md: 0 }}
       align="center"
       h={{ base: 'auto', md: '100%' }}
     >

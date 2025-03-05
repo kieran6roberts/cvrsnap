@@ -17,7 +17,17 @@ export const TemplatePreview = ({
   return (
     <Stack key={templateName} gap={4} component="article">
       {templateName ? (
-        <Text component="span" fw={600} fz={{ base: 18, sm: 14 }} ta="center">
+        <Text
+          component="span"
+          fw={600}
+          fz={{ base: 18, sm: 12 }}
+          ta="center"
+          style={{
+            whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
+            overflow: 'hidden'
+          }}
+        >
           {templateName}
         </Text>
       ) : null}

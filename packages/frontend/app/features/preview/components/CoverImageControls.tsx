@@ -1,5 +1,5 @@
 import { Flex, Button, LoadingOverlay } from '@mantine/core';
-import { Download, Restart } from 'iconoir-react';
+import { DownloadCircle, RefreshCircle } from 'iconoir-react';
 
 type CoverImageControlsProps =
   | {
@@ -22,38 +22,30 @@ export function CoverImageControls({
   isDownloadDisabled
 }: CoverImageControlsProps) {
   return (
-    <Flex gap="xs" justify="center" wrap="wrap">
-      <Button
-        visibleFrom="md"
-        onClick={resetStyles}
-        size="md"
-        rightSection={<Restart width={24} height={24} />}
-        variant="outline"
-      >
+    <Flex gap="xs" justify="center" wrap="wrap" visibleFrom="md">
+      <Button onClick={resetStyles} size="md" rightSection={<RefreshCircle width={24} height={24} />} variant="outline">
         Reset cover
       </Button>
 
       <Button
-        visibleFrom="md"
         variant="primary"
         darkHidden
         disabled={isDownloadDisabled}
         {...(downloadImage ? { onClick: downloadImage } : {})}
         size="md"
-        rightSection={<Download width={24} height={24} />}
+        rightSection={<DownloadCircle width={24} height={24} />}
         className="plausible-event-name=Download+Image"
       >
         <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
         Save image
       </Button>
       <Button
-        visibleFrom="md"
         variant="white"
         lightHidden
         disabled={isDownloadDisabled}
         {...(downloadImage ? { onClick: downloadImage } : {})}
         size="md"
-        rightSection={<Download width={24} height={24} />}
+        rightSection={<DownloadCircle width={24} height={24} />}
         className="plausible-event-name=Download+Image"
       >
         <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />

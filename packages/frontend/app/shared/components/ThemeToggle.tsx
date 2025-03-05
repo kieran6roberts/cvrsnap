@@ -22,7 +22,7 @@ export function ThemeToggle({ size = 'md' }: ThemeToggleProps) {
         darkHidden
         onClick={() => setColorScheme(colorScheme === SITE_THEMES.light ? SITE_THEMES.dark : SITE_THEMES.light)}
         variant="subtle"
-        bg="white"
+        bg="var(--mantine-color-gray-0)"
         size={size}
         aria-label="Toggle color scheme"
       >
