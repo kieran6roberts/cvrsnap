@@ -24,6 +24,7 @@ import { BACKGROUND_TEMPLATES } from '../consts/templates';
 import { RGBAColor, HEXColor } from '~/shared/consts';
 import { DrawerScrollArea } from '~/features/editor/components/DrawerScrollArea';
 import { SectionHeader } from '~/features/editor/components/SectionHeader';
+import { SettingsTabs } from '~/features/editor/components/SettingsTabs';
 
 export function BackgroundSettings() {
   const {
@@ -87,197 +88,223 @@ export function BackgroundSettings() {
   return (
     <>
       <SectionHeader />
-      <DrawerScrollArea>
-        <Stack gap="xl" pb={{ base: 90, md: 16 }} mt={12}>
-          <Fieldset legend="Colors">
-            <ColorInput
-              key={`color1-${isResettingImage}`}
-              format="rgba"
-              label="Background color 1"
-              description="Accepts RGBA"
-              defaultValue={backgroundColors?.color1 ?? 'rgba(255, 255, 255, 1)'}
-              onChangeEnd={(value) => updateBackground({ colors: { ...backgroundColors, color1: value as RGBAColor } })}
-            />
-
-            {!isSolidTemplate ? (
-              <ColorInput
-                key={`color2-${isResettingImage}`}
-                format="rgba"
-                label="Background color 2"
-                description="Accepts RGBA"
-                defaultValue={backgroundColors?.color2 ?? 'rgba(255, 255, 255, 1)'}
-                onChangeEnd={(value) =>
-                  updateBackground({ colors: { ...backgroundColors, color2: value as RGBAColor } })
-                }
-                disabled={!!backgroundImage}
-              />
-            ) : null}
-
-            {isMin3BackgroundTemplate ? (
-              <>
-                <ColorInput
-                  key={`color3-${isResettingImage}`}
-                  format="rgba"
-                  label="Background color 3"
-                  description="Accepts RGBA"
-                  defaultValue={backgroundColors?.color3 ?? 'rgba(255, 255, 255, 1)'}
-                  onChangeEnd={(value) =>
-                    updateBackground({ colors: { ...backgroundColors, color3: value as RGBAColor } })
-                  }
-                  disabled={!!backgroundImage}
-                />
-                {isMin4BackgroundTemplate ? (
+      <SettingsTabs
+        tabs={[
+          {
+            label: 'Patterns',
+            value: 'patterns',
+            content: (
+              <DrawerScrollArea>
+                <Fieldset disabled={!!backgroundImage}>
                   <ColorInput
-                    key={`color4-${isResettingImage}`}
-                    format="rgba"
-                    label="Background color 4"
-                    description="Accepts RGBA"
-                    defaultValue={backgroundColors?.color4 ?? 'rgba(255, 255, 255, 1)'}
-                    onChangeEnd={(value) =>
-                      updateBackground({ colors: { ...backgroundColors, color4: value as RGBAColor } })
-                    }
                     disabled={!!backgroundImage}
+                    format="hex"
+                    label="Pattern color"
+                    description="Accepts HEX"
+                    value={backgroundPattern.color}
+                    onChangeEnd={(color) =>
+                      updateBackground({
+                        pattern: {
+                          ...backgroundPattern,
+                          url: backgroundPattern.name
+                            ? (patterns as any)[backgroundPattern.name](color, backgroundPattern.opacity)
+                            : null,
+                          color: color as HEXColor
+                        }
+                      })
+                    }
                   />
-                ) : null}
-              </>
-            ) : null}
-          </Fieldset>
-          <Fieldset legend="Images">
-            {backgroundImage ? (
-              <Stack>
-                <Text fw={500} component="span">
-                  Upload background image
-                </Text>
-                <Image
-                  src={backgroundImage}
-                  radius="md"
-                  style={{ border: '1px solid var(--mantine-color-default-border)', aspectRatio: '16/9' }}
-                  alt="Background image"
-                  width="100%"
-                />
-                <Button aria-label="Remove background image" onClick={() => onBackgroundImageChange(null)}>
-                  Clear
-                </Button>
-              </Stack>
-            ) : (
-              <FileInput
-                clearable
-                description="Accepts PNG, JPEG, and WEBP"
-                leftSection={<MediaImageFolder width={16} height={16} />}
-                accept="image/png,image/jpeg,image/webp"
-                label="Upload background image"
-                placeholder="Click to upload"
-                maw={368}
-                onChange={onBackgroundImageChange}
-              />
-            )}
-            {backgroundImage ? (
-              <NumberInput
-                defaultValue={0}
-                max={1}
-                min={0}
-                step={0.1}
-                decimalScale={1}
-                onChange={(value) => {
-                  const percentage = value ? decimalToPercentage(Number(value)) : 0;
-                  updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
-                }}
-                label="Overlay opacity"
-                allowNegative={false}
-              />
-            ) : null}
-          </Fieldset>
-          <Fieldset legend="Patterns" disabled={!!backgroundImage}>
-            <ColorInput
-              disabled={!!backgroundImage}
-              format="hex"
-              label="Pattern color"
-              description="Accepts HEX"
-              value={backgroundPattern.color}
-              onChangeEnd={(color) =>
-                updateBackground({
-                  pattern: {
-                    ...backgroundPattern,
-                    url: backgroundPattern.name
-                      ? (patterns as any)[backgroundPattern.name](color, backgroundPattern.opacity)
-                      : null,
-                    color: color as HEXColor
-                  }
-                })
-              }
-            />
-            <NumberInput
-              disabled={!!backgroundImage}
-              max={1}
-              min={0}
-              step={0.1}
-              value={backgroundPattern.opacity}
-              onChange={(value) =>
-                updateBackground({
-                  pattern: {
-                    ...backgroundPattern,
-                    opacity: Number(value),
-                    url: backgroundPattern.name
-                      ? (patterns as any)[backgroundPattern.name](backgroundPattern.color, Number(value))
-                      : null
-                  }
-                })
-              }
-              label="Pattern opacity"
-              allowNegative={false}
-            />
-            <SimpleGrid cols={{ base: 1, xs: 3, md: 2 }} spacing="sm" verticalSpacing="xl" component="section">
-              {Object.entries(patterns).map(([key, value]) => {
-                const isSelected = backgroundPattern.name === key;
-                return (
-                  <Stack key={key} gap={4} component="article">
-                    <Text
-                      component="span"
-                      fw={600}
-                      fz={{ base: 18, sm: 12 }}
-                      ta="center"
-                      style={{
-                        whiteSpace: 'nowrap',
-                        textOverflow: 'ellipsis',
-                        overflow: 'hidden'
-                      }}
-                    >
-                      {key}
-                    </Text>
+                  <NumberInput
+                    disabled={!!backgroundImage}
+                    max={1}
+                    min={0}
+                    step={0.1}
+                    value={backgroundPattern.opacity}
+                    onChange={(value) =>
+                      updateBackground({
+                        pattern: {
+                          ...backgroundPattern,
+                          opacity: Number(value),
+                          url: backgroundPattern.name
+                            ? (patterns as any)[backgroundPattern.name](backgroundPattern.color, Number(value))
+                            : null
+                        }
+                      })
+                    }
+                    label="Pattern opacity"
+                    allowNegative={false}
+                  />
+                  <SimpleGrid cols={{ base: 1, xs: 3, md: 2 }} spacing="sm" verticalSpacing="xl" component="section">
+                    {Object.entries(patterns).map(([key, value]) => {
+                      const isSelected = backgroundPattern.name === key;
+                      return (
+                        <Stack key={key} gap={4} component="article">
+                          <Text
+                            component="span"
+                            fw={600}
+                            fz={{ base: 18, sm: 12 }}
+                            ta="center"
+                            style={{
+                              whiteSpace: 'nowrap',
+                              textOverflow: 'ellipsis',
+                              overflow: 'hidden'
+                            }}
+                          >
+                            {key}
+                          </Text>
 
-                    <UnstyledButton
-                      aria-label={`Toggle ${key} background pattern`}
-                      data-selected={!!isSelected}
-                      onClick={() => onPatternChange(key)}
-                      style={{ cursor: !backgroundImage ? 'pointer' : 'not-allowed' }}
-                    >
-                      <Paper
+                          <UnstyledButton
+                            aria-label={`Toggle ${key} background pattern`}
+                            data-selected={!!isSelected}
+                            onClick={() => onPatternChange(key)}
+                            style={{ cursor: !backgroundImage ? 'pointer' : 'not-allowed' }}
+                          >
+                            <Paper
+                              radius="md"
+                              className={classes.patternCard}
+                              style={{
+                                backgroundImage: value(backgroundPattern.color, 1),
+                                border: isSelected
+                                  ? '1px solid var(--mantine-primary-color-light-color)'
+                                  : '1px solid var(--mantine-color-default-border)',
+                                aspectRatio: '2.2'
+                              }}
+                            >
+                              {isSelected && !backgroundImage && (
+                                <Center className={classes['patternCard--selected']}>
+                                  <Center component="span" w={40} h={40} bg="white" style={{ borderRadius: '100%' }}>
+                                    <Check width={32} height={32} color="var(--mantine-color-blue-filled)" />
+                                  </Center>
+                                </Center>
+                              )}
+                            </Paper>
+                          </UnstyledButton>
+                        </Stack>
+                      );
+                    })}
+                  </SimpleGrid>
+                </Fieldset>
+              </DrawerScrollArea>
+            )
+          },
+          {
+            label: 'Colors',
+            value: 'colors',
+            content: (
+              <DrawerScrollArea>
+                <Fieldset>
+                  <ColorInput
+                    key={`color1-${isResettingImage}`}
+                    format="rgba"
+                    label="Background color 1"
+                    description="Accepts RGBA"
+                    defaultValue={backgroundColors?.color1 ?? 'rgba(255, 255, 255, 1)'}
+                    onChangeEnd={(value) =>
+                      updateBackground({ colors: { ...backgroundColors, color1: value as RGBAColor } })
+                    }
+                  />
+
+                  {!isSolidTemplate ? (
+                    <ColorInput
+                      key={`color2-${isResettingImage}`}
+                      format="rgba"
+                      label="Background color 2"
+                      description="Accepts RGBA"
+                      defaultValue={backgroundColors?.color2 ?? 'rgba(255, 255, 255, 1)'}
+                      onChangeEnd={(value) =>
+                        updateBackground({ colors: { ...backgroundColors, color2: value as RGBAColor } })
+                      }
+                      disabled={!!backgroundImage}
+                    />
+                  ) : null}
+
+                  {isMin3BackgroundTemplate ? (
+                    <>
+                      <ColorInput
+                        key={`color3-${isResettingImage}`}
+                        format="rgba"
+                        label="Background color 3"
+                        description="Accepts RGBA"
+                        defaultValue={backgroundColors?.color3 ?? 'rgba(255, 255, 255, 1)'}
+                        onChangeEnd={(value) =>
+                          updateBackground({ colors: { ...backgroundColors, color3: value as RGBAColor } })
+                        }
+                        disabled={!!backgroundImage}
+                      />
+                      {isMin4BackgroundTemplate ? (
+                        <ColorInput
+                          key={`color4-${isResettingImage}`}
+                          format="rgba"
+                          label="Background color 4"
+                          description="Accepts RGBA"
+                          defaultValue={backgroundColors?.color4 ?? 'rgba(255, 255, 255, 1)'}
+                          onChangeEnd={(value) =>
+                            updateBackground({ colors: { ...backgroundColors, color4: value as RGBAColor } })
+                          }
+                          disabled={!!backgroundImage}
+                        />
+                      ) : null}
+                    </>
+                  ) : null}
+                </Fieldset>
+              </DrawerScrollArea>
+            )
+          },
+          {
+            label: 'Images',
+            value: 'images',
+            content: (
+              <DrawerScrollArea>
+                <Fieldset>
+                  {backgroundImage ? (
+                    <Stack>
+                      <Text fw={500} component="span">
+                        Upload background image
+                      </Text>
+                      <Image
+                        src={backgroundImage}
                         radius="md"
-                        className={classes.patternCard}
-                        style={{
-                          backgroundImage: value(backgroundPattern.color, 1),
-                          border: isSelected
-                            ? '1px solid var(--mantine-primary-color-light-color)'
-                            : '1px solid var(--mantine-color-default-border)',
-                          aspectRatio: '2.2'
-                        }}
-                      >
-                        {isSelected && !backgroundImage && (
-                          <Center className={classes['patternCard--selected']}>
-                            <Center component="span" w={40} h={40} bg="white" style={{ borderRadius: '100%' }}>
-                              <Check width={32} height={32} color="var(--mantine-color-blue-filled)" />
-                            </Center>
-                          </Center>
-                        )}
-                      </Paper>
-                    </UnstyledButton>
-                  </Stack>
-                );
-              })}
-            </SimpleGrid>
-          </Fieldset>
-        </Stack>
-      </DrawerScrollArea>
+                        style={{ border: '1px solid var(--mantine-color-default-border)', aspectRatio: '16/9' }}
+                        alt="Background image"
+                        width="100%"
+                      />
+                      <Button aria-label="Remove background image" onClick={() => onBackgroundImageChange(null)}>
+                        Clear
+                      </Button>
+                    </Stack>
+                  ) : (
+                    <FileInput
+                      clearable
+                      description="Accepts PNG, JPEG, and WEBP"
+                      leftSection={<MediaImageFolder width={16} height={16} />}
+                      accept="image/png,image/jpeg,image/webp"
+                      label="Upload background image"
+                      placeholder="Click to upload"
+                      maw={368}
+                      onChange={onBackgroundImageChange}
+                    />
+                  )}
+                  {backgroundImage ? (
+                    <NumberInput
+                      defaultValue={0}
+                      max={1}
+                      min={0}
+                      step={0.1}
+                      decimalScale={1}
+                      onChange={(value) => {
+                        const percentage = value ? decimalToPercentage(Number(value)) : 0;
+                        updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
+                      }}
+                      label="Overlay opacity"
+                      allowNegative={false}
+                    />
+                  ) : null}
+                </Fieldset>
+              </DrawerScrollArea>
+            )
+          }
+        ]}
+      />
     </>
   );
 }
