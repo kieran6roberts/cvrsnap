@@ -1,18 +1,24 @@
-import { Select } from '@mantine/core';
+import { Select, SelectProps } from '@mantine/core';
 
 import { IMAGE_DOWNLOAD_SIZES } from '~/shared/consts';
 
 export function CoverImageSize({
   defaultImageSize,
-  onAspectRatioChange
+  onAspectRatioChange,
+  width = '275px',
+  ...rest
 }: {
   defaultImageSize: string;
   onAspectRatioChange: (value: string | null) => void;
+  label?: string;
+  width?: string;
+
+  rest?: SelectProps;
 }) {
   return (
     <Select
-      label="Image size"
-      w="275px"
+      w={width}
+      maw={275}
       value={defaultImageSize}
       data={Object.values(IMAGE_DOWNLOAD_SIZES).map((size) => ({
         value: size.value,
@@ -23,6 +29,7 @@ export function CoverImageSize({
       allowDeselect={false}
       comboboxProps={{ width: '300px', position: 'bottom' }}
       checkIconPosition="right"
+      {...rest}
     />
   );
 }

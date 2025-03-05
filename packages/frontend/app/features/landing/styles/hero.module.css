@@ -1,22 +1,3 @@
-.themed-bg {
-  position: relative;
-  background-color: var(--mantine-color-gray-0);
-
-  [data-mantine-color-scheme='dark'] & {
-    background-color: #0a0a08;
-  }
-}
-
-.landing-section {
-  position: relative;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--mantine-color-gray-3);
-
-  [data-mantine-color-scheme='dark'] & {
-    border-bottom: 1px solid var(--mantine-color-dark-6);
-  }
-}
-
 .hero-section {
   position: relative;
   align-items: center;
@@ -80,23 +61,9 @@
         color: var(--mantine-color-customDark-1);
       }
     }
-  }
-}
 
-/* Landing examples */
-.landing-examples {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  z-index: 1;
-  margin-top: 2rem;
-
-  &--image {
-    object-fit: cover;
-    box-shadow: var(--mantine-shadow-sm);
-    border-radius: var(--mantine-radius-lg);
+    &--message-free {
+      color: var(--mantine-color-green-7);
+    }
   }
 }

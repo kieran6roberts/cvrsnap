@@ -9,7 +9,7 @@ import { useImageDownload } from '~/shared/hooks/useImageDownload';
 import { ImagePreview } from '~/features/preview/components/ImagePreview';
 import { updateCSSVariables, getAspectRatioData } from '~/shared/utils/styles';
 import { CoverImageControls } from '~/features/preview/components/CoverImageControls';
-import { CoverImageSize } from '~/features/preview/components/CoverImageSize';
+import { CoverImageSize } from '~/shared/components/CoverImageSize';
 import { useEditorUIStore } from '~/shared/stores/EditorUIStore';
 import type { DownloadSizeInfo } from '~/shared/consts';
 const Confetti = lazy(() => import('~/features/preview/components/Confetti'));
@@ -56,6 +56,7 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
           </ActionIcon>
         ) : null}
         <CoverImageSize
+          label="Image size"
           defaultImageSize={defaultImageSize}
           onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
         />

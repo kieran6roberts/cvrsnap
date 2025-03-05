@@ -4,7 +4,7 @@ import type { LinksFunction } from 'react-router';
 import { Box, ColorSchemeScript, MantineProvider, createTheme, mantineHtmlProps } from '@mantine/core';
 import { ToastProvider } from '~/shared/providers/ToastProvider';
 import { DOMAIN, SITE_NAME } from '~/config/consts';
-import classes from '~/shared/styles/index.module.css';
+import '~/shared/styles/index.css';
 
 export const links: LinksFunction = () => [
   {
@@ -172,7 +172,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <script defer data-domain={DOMAIN} data-api="/api/event" src="/js/script.tagged-events.js"></script>
         ) : null}
       </head>
-      <body className={classes['themed-bg']}>
+      <body>
         <MantineProvider theme={theme}>{children}</MantineProvider>
         <ToastProvider />
         <ScrollRestoration />
@@ -215,11 +215,7 @@ export function ErrorBoundary() {
 export function HydrateFallback() {
   return (
     <MantineProvider>
-      <Box
-        component="main"
-        style={{ minHeight: 'calc(100vh - var(--main-header-height))' }}
-        className={classes['themed-bg']}
-      />
+      <Box style={{ minHeight: 'calc(100vh - var(--main-header-height))' }} />
     </MantineProvider>
   );
 }

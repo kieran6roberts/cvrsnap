@@ -6,6 +6,7 @@
   height: 100%;
   display: grid;
   grid-template-columns: auto repeat(6, 1fr) auto;
+  pointer-events: none;
 }
 
 .column-gutter {

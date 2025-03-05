@@ -1,0 +1,21 @@
+:root {
+  --dark-bg: #0a0a08;
+  --main-header-height: 69px;
+}
+
+body {
+  background-color: var(--mantine-color-gray-0);
+
+  [data-mantine-color-scheme='dark'] & {
+    background-color: var(--dark-bg);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}

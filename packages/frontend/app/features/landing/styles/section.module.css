@@ -1,0 +1,35 @@
+.landing-section {
+  position: relative;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  margin-top: 6rem;
+
+  @media (min-width: 768px) {
+    padding: 0 1rem;
+  }
+
+  [data-mantine-color-scheme='dark'] & {
+    border-bottom: 1px solid var(--mantine-color-dark-6);
+  }
+
+  &--title {
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--mantine-color-dark-8);
+
+    [data-mantine-color-scheme='dark'] & {
+      color: var(--mantine-color-gray-3);
+    }
+  }
+
+  &--copy {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--mantine-color-gray-7);
+    max-width: 600px;
+    margin-bottom: 4rem;
+
+    [data-mantine-color-scheme='dark'] & {
+      color: var(--mantine-color-gray-3);
+    }
+  }
+}

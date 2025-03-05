@@ -7,7 +7,7 @@ import classes from '../styles/EditorDrawer.module.css';
 import { Download } from 'iconoir-react';
 import { useImageDownload } from '~/shared/hooks/useImageDownload';
 import { DownloadSuccessModal } from '~/shared/components/DownloadSuccessModal';
-import { CoverImageSize } from '~/features/preview/components/CoverImageSize';
+import { CoverImageSize } from '~/shared/components/CoverImageSize';
 import { getAspectRatioData, updateCSSVariables } from '~/shared/utils/styles';
 import type { DownloadSizeInfo } from '~/shared/consts';
 interface DrawerFooterProps {
@@ -97,6 +97,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
               style={{ alignItems: 'center' }}
             >
               <CoverImageSize
+                label="Image size"
                 defaultImageSize={defaultImageSize}
                 onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
               />
