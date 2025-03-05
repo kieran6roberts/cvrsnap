@@ -32,6 +32,7 @@ export function ImagePreview({ imageNodeRef }: { imageNodeRef: React.RefObject<H
             alignItems: 'var(--cover-align-items)',
             position: 'relative',
             flexDirection: 'var(--cover-flex-direction)' as React.CSSProperties['flexDirection'],
+            maxWidth: '900px',
             gap: '1rem',
             overflow: 'hidden',
             padding: '3rem',

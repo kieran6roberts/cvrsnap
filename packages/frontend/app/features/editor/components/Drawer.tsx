@@ -1,5 +1,6 @@
-import { Flex, Box, Title, ActionIcon, Tabs, Stack } from '@mantine/core';
-import { Text as IconText, MediaImage, AlignBottomBox, ArrowLeftTag, InfoCircle } from 'iconoir-react';
+import { Flex, Box, Tabs, Stack, Divider, Text } from '@mantine/core';
+import { Text as IconText, MediaImage, AlignBottomBox, InfoCircle } from 'iconoir-react';
+import React from 'react';
 
 import classes from '~/features/editor/styles/EditorDrawer.module.css';
 import { TextSettings } from '~/features/editor/components/TextSettings';
@@ -12,121 +13,108 @@ import { DrawerControl } from '~/features/editor/components/DrawerControl';
 import { InfoSection } from '~/features/editor/components/InfoSection';
 import { DRAWER_SECTIONS } from '~/shared/consts';
 import { DrawerFooter } from '~/features/editor/components/DrawerFooter';
+import { ThemeToggle } from '~/shared/components/ThemeToggle';
 
 const editSections = [
   {
     id: DRAWER_SECTIONS.templates,
     title: 'Templates',
-    color: 'grape',
+    color: 'grape.5',
     content: () => <TemplateSettings />,
     icon: <AlignBottomBox width={24} height={24} />
   },
   {
     id: DRAWER_SECTIONS.text,
     title: 'Text',
-    color: 'lime',
+    color: 'orange.5',
     content: () => <TextSettings />,
     icon: <IconText width={24} height={24} />
   },
   {
     id: DRAWER_SECTIONS.background,
     title: 'Background',
-    color: 'orange',
+    color: 'blue.5',
     content: () => <BackgroundSettings />,
     icon: <MediaImage width={24} height={24} />
   },
   {
     id: DRAWER_SECTIONS.info,
     title: 'Info',
-    color: 'gray.4',
+    color: 'teal.5',
     content: () => <InfoSection />,
-    icon: <InfoCircle width={24} height={24} color="var(--mantine-color-text)" />
+    icon: <InfoCircle width={24} height={24} />
   }
 ] as const;
 
 export function Drawer({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDivElement | null> }) {
-  const { setDrawerOpen, openSection, setOpenSection } = useEditorUIStore();
+  const { openSection, setOpenSection } = useEditorUIStore();
   const { resetEditor } = useEditor();
 
   const openSectionIndex = editSections.findIndex((section) => section.id === openSection);
 
   return (
-    <Box component="aside" className={classes.sidebar} pos="relative">
-      <Flex
-        justify="space-between"
-        align="center"
-        p="md"
-        style={{ borderBottom: '1px solid var(--mantine-color-default-border)' }}
-      >
-        <Title size="sm" order={2}>
-          Cover settings
-        </Title>
-        <ActionIcon
-          visibleFrom="md"
-          onClick={() => setDrawerOpen(false)}
-          variant="default"
-          size={32}
-          title="Close sidebar"
-          aria-label="Close sidebar"
-        >
-          <ArrowLeftTag width={18} height={18} />
-        </ActionIcon>
-      </Flex>
+    <Box component="aside" className={classes.sidebar}>
       <Tabs
         visibleFrom="md"
         variant="none"
         orientation="vertical"
         value={openSection}
+        h="100%"
         onChange={(value) => setOpenSection(value as OpenSection)}
       >
-        <Tabs.List component="section" className={classes['sidebar-controls']} px={8} py={16}>
-          <Stack>
-            {editSections.map((section) => {
-              const isActive = section.id === openSection;
+        <Box className={classes['sidebar-controls-container']}>
+          <ThemeToggle size="xl" />
+          <Divider />
+          <Tabs.List component="section" className={classes['sidebar-controls']} px={{ base: 2, md: 12 }} py={16}>
+            <Stack align="center" justify="center">
+              {editSections.map((section) => {
+                const isActive = section.id === openSection;
 
-              return (
+                return (
+                  <React.Fragment key={section.id}>
+                    <DrawerControl
+                      value={section.id}
+                      isActive={isActive}
+                      color={section.color}
+                      label={section.title}
+                      component={Tabs.Tab}
+                    >
+                      {section.icon}
+                    </DrawerControl>
+                    <Text size="xs" ta="center" fw={500}>
+                      {section.title}
+                    </Text>
+                  </React.Fragment>
+                );
+              })}
+            </Stack>
+          </Tabs.List>
+        </Box>
+
+        <Tabs.Panel value={openSection}>{editSections[openSectionIndex].content()}</Tabs.Panel>
+      </Tabs>
+      <Flex direction="column" hiddenFrom="md" variant="none" pos="sticky" top={0}>
+        <Flex direction="row" component="section" className={classes['sidebar-controls']} gap="md" p="md">
+          {editSections.map((section) => {
+            const isActive = section.id === openSection;
+
+            return (
+              <Stack key={section.id} align="center" justify="center">
                 <DrawerControl
                   key={section.id}
                   value={section.id}
                   isActive={isActive}
                   color={section.color}
                   label={section.title}
-                  component={Tabs.Tab}
+                  component="button"
+                  onClick={() => setOpenSection(section.id)}
                 >
                   {section.icon}
                 </DrawerControl>
-              );
-            })}
-          </Stack>
-        </Tabs.List>
-
-        <Tabs.Panel value={openSection}>{editSections[openSectionIndex].content()}</Tabs.Panel>
-      </Tabs>
-      <Flex direction="column" hiddenFrom="md" variant="none">
-        <Flex
-          direction="row"
-          component="section"
-          className={classes['sidebar-controls']}
-          pos="sticky"
-          top={0}
-          gap="md"
-          p="md"
-        >
-          {editSections.map((section) => {
-            const isActive = section.id === openSection;
-
-            return (
-              <DrawerControl
-                key={section.id}
-                value={section.id}
-                isActive={isActive}
-                color={section.color}
-                label={section.title}
-                component="button"
-                onClick={() => setOpenSection(section.id)}
-              >
-                {section.icon}
-              </DrawerControl>
+                <Text size="xs" ta="center" fw={500}>
+                  {section.title}
+                </Text>
+              </Stack>
             );
           })}
         </Flex>

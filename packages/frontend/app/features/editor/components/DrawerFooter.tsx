@@ -43,7 +43,6 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
       <Flex
         justify={{ base: 'space-between', md: 'flex-start' }}
         align="center"
-        bg="var(--mantine-color-body)"
         pos={{ base: 'fixed', md: 'sticky' }}
         className={classes['sidebar-footer']}
         bottom={0}
@@ -124,7 +123,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
                 w="100%"
                 hiddenFrom="md"
                 onClick={onDownloadImage}
-                size="md"
+                size="sm"
                 rightSection={<Download width={24} height={24} />}
                 mt="auto"
               >

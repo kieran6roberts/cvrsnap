@@ -1,10 +1,9 @@
 .main-header {
-  background-color: white;
-  height: var(--main-header-height);
-  border-bottom: 1px solid var(--mantine-color-default-border);
+  padding: 12px;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
   z-index: 50;
 
   [data-mantine-color-scheme='dark'] & {
-    background-color: var(--mantine-color-dark-9);
+    border-bottom: 1px solid var(--mantine-color-dark-6);
   }
 }

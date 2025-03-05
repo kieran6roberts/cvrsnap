@@ -62,7 +62,6 @@
   position: relative;
   margin: 0 auto;
   padding: 4px;
-  opacity: 0.9;
   overflow: hidden;
   transition: opacity 0.2s ease-in-out;
   background: white;
@@ -73,13 +72,9 @@
     border: 1px solid var(--mantine-color-dark-8);
   }
 
-  &:hover {
-    opacity: 1;
-  }
-
   &-content {
     display: flex;
-    aspect-ratio: 1.9;
+    aspect-ratio: 2.2;
     max-width: 100%;
     gap: 8px;
   }
