@@ -37,6 +37,7 @@
     "iconoir-react": "^7.10.1",
     "idb-keyval": "^6.2.1",
     "isbot": "4",
+    "motion": "^12.4.7",
     "react": "^18.3.1",
     "react-confetti": "^6.2.2",
     "react-dom": "^18.3.1",

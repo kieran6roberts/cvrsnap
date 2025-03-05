@@ -12,19 +12,15 @@ export const TemplatePreview = ({
   children: React.ReactNode;
   isSelected: boolean;
   onTemplateUpdate: () => void;
-  templateName: string;
+  templateName?: string;
 }) => {
   return (
     <Stack key={templateName} gap={4} component="article">
-      <Text
-        component="span"
-        fw={600}
-        fz={{ base: 18, sm: 14 }}
-        ta="center"
-        c={isSelected ? 'var(--mantine-color-primary-filled)' : 'var(--mantine-color-dimmed)'}
-      >
-        {templateName}
-      </Text>
+      {templateName ? (
+        <Text component="span" fw={600} fz={{ base: 18, sm: 14 }} ta="center">
+          {templateName}
+        </Text>
+      ) : null}
 
       <UnstyledButton
         aria-label={`Toggle ${templateName} template`}
