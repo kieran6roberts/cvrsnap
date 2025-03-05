@@ -1,4 +1,6 @@
-import { ActionIcon, createPolymorphicComponent, Text, Stack } from '@mantine/core';
+/* eslint-disable react/display-name */
+import { forwardRef } from 'react';
+import { ActionIcon, createPolymorphicComponent } from '@mantine/core';
 import type { ActionIconProps } from '@mantine/core';
 
 interface DrawerControlProps extends ActionIconProps {
@@ -9,27 +11,22 @@ interface DrawerControlProps extends ActionIconProps {
 }
 
 export const DrawerControl = createPolymorphicComponent<'button', DrawerControlProps>(
-  ({ children, isActive, label, value, ...props }: DrawerControlProps) => {
+  forwardRef<HTMLButtonElement, DrawerControlProps>(({ children, isActive, label, value, ...props }, ref) => {
     return (
-      <Stack align="center" gap={4}>
-        <ActionIcon
-          variant={isActive ? 'light' : 'subtle'}
-          value={value}
-          radius="xl"
-          size="xl"
-          style={{
-            justifyContent: 'center'
-          }}
-          aria-label={label}
-          {...props}
-        >
-          {children}
-        </ActionIcon>
-
-        <Text size="xs" ta="center">
-          {label}
-        </Text>
-      </Stack>
+      <ActionIcon
+        ref={ref}
+        variant={isActive ? 'light' : 'subtle'}
+        value={value}
+        radius="xl"
+        size="xl"
+        style={{
+          justifyContent: 'center'
+        }}
+        aria-label={label}
+        {...props}
+      >
+        {children}
+      </ActionIcon>
     );
-  }
+  })
 );

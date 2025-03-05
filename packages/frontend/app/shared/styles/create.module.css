@@ -1,0 +1,11 @@
+.main {
+  background: linear-gradient(to bottom right, var(--mantine-color-customDark-0), var(--mantine-color-customDark-1));
+
+  [data-mantine-color-scheme='dark'] & {
+    background: linear-gradient(to bottom right, var(--mantine-color-customDark-9), var(--mantine-color-customDark-7));
+  }
+
+  @media (min-width: em(992px)) {
+    min-height: 100vh;
+  }
+}

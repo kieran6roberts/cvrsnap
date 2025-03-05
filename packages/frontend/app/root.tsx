@@ -82,7 +82,7 @@ const theme = createTheme({
     Select: {
       defaultProps: {
         radius: 'xl',
-        size: 'md'
+        size: 'sm'
       },
       styles: {
         dropdown: {
@@ -101,13 +101,13 @@ const theme = createTheme({
     TextInput: {
       defaultProps: {
         radius: 'xl',
-        size: 'md'
+        size: 'sm'
       }
     },
     ColorInput: {
       defaultProps: {
         radius: 'xl',
-        size: 'md'
+        size: 'sm'
       }
     },
     ScrollArea: {
@@ -117,13 +117,13 @@ const theme = createTheme({
     },
     NumberInput: {
       defaultProps: {
-        size: 'md',
+        size: 'sm',
         radius: 'xl'
       }
     },
     FileInput: {
       defaultProps: {
-        size: 'md',
+        size: 'sm',
         radius: 'xl'
       }
     },

@@ -1,6 +1,7 @@
 import { Box, ActionIcon } from '@mantine/core';
 import { ArrowRightTag } from 'iconoir-react';
 import { lazy } from 'react';
+import classNames from 'classnames';
 
 import { useEditor } from '~/shared/stores/EditorContext';
 import classes from '~/features/preview/styles/CoverImage.module.css';
@@ -12,6 +13,7 @@ import { CoverImageControls } from '~/features/preview/components/CoverImageCont
 import { CoverImageSize } from '~/shared/components/CoverImageSize';
 import { useEditorUIStore } from '~/shared/stores/EditorUIStore';
 import type { DownloadSizeInfo } from '~/shared/consts';
+import { Logo } from '~/shared/components/Logo';
 const Confetti = lazy(() => import('~/features/preview/components/Confetti'));
 
 export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDivElement | null> }) {
@@ -39,7 +41,7 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
 
   return (
     <>
-      <Box className={classes.coverWrapper}>
+      <Box className={classNames(classes.coverWrapper, { [classes['highlighted']]: isDrawerOpen })}>
         {!isDrawerOpen ? (
           <ActionIcon
             visibleFrom="md"
@@ -55,11 +57,18 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
             <ArrowRightTag width={18} height={18} />
           </ActionIcon>
         ) : null}
+        {!isDrawerOpen ? (
+          <Box visibleFrom="md" pos="absolute" top={16} right={20}>
+            <Logo />
+          </Box>
+        ) : null}
+
         <CoverImageSize
           label="Image size"
           defaultImageSize={defaultImageSize}
           onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
         />
+
         <ImagePreview imageNodeRef={imageNodeRef} />
 
         <CoverImageControls
