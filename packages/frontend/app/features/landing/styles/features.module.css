@@ -1,0 +1,117 @@
+.features-container {
+  --feature-border-radius: var(--mantine-radius-md);
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: dense;
+  gap: 1rem;
+  background-color: var(--mantine-color-gray-0);
+  border: 1px solid var(--mantine-color-gray-2);
+  z-index: 1;
+  padding: 2rem;
+  margin-bottom: 6rem;
+
+  [data-mantine-color-scheme='dark'] & {
+    background-color: var(--mantine-color-dark-9);
+    border: 1px solid var(--mantine-color-dark-6);
+  }
+
+  .feature-section {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+    background-color: white;
+    border: 1px solid var(--mantine-color-gray-3);
+    border-radius: var(--feature-border-radius);
+    padding: 0.5rem;
+    overflow: hidden;
+
+    [data-mantine-color-scheme='dark'] & {
+      background-color: var(--dark-bg);
+      border: 1px solid var(--mantine-color-dark-6);
+    }
+  }
+
+  .feature-body {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--feature-border-radius);
+    padding-top: 1rem;
+    font-size: 1.6rem;
+  }
+
+  .feature-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: var(--mantine-color-dark-7);
+
+    [data-mantine-color-scheme='dark'] & {
+      color: var(--mantine-color-gray-3);
+    }
+  }
+
+  .feature-title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .feature-description {
+    font-size: 0.6em;
+    font-weight: 400;
+    color: var(--mantine-color-gray-7);
+
+    [data-mantine-color-scheme='dark'] & {
+      color: var(--mantine-color-gray-6);
+    }
+  }
+
+  .feature-highlight-container {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--mantine-color-gray-1);
+    border-radius: var(--feature-border-radius);
+
+    [data-mantine-color-scheme='dark'] & {
+      background-color: var(--mantine-color-dark-8);
+    }
+  }
+
+  .feature-section-large {
+    grid-column: 1 / -1;
+
+    @media (min-width: 992px) {
+      grid-column: span 8;
+    }
+  }
+
+  .feature-section-medium {
+    grid-column: 1 / -1;
+
+    @media (min-width: 992px) {
+      grid-column: span 6;
+    }
+  }
+
+  .feature-section-small {
+    grid-column: 1 / -1;
+
+    @media (min-width: 992px) {
+      grid-column: span 4;
+    }
+  }
+}
