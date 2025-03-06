@@ -18,8 +18,8 @@ export function TemplateSettings() {
       <SettingsTabs
         tabs={[
           {
-            label: 'Background',
-            value: 'background',
+            label: 'Design',
+            value: 'design',
             content: (
               <DrawerScrollArea>
                 <Fieldset>
@@ -56,8 +56,8 @@ export function TemplateSettings() {
             )
           },
           {
-            label: 'Text',
-            value: 'text',
+            label: 'Contents',
+            value: 'contents',
             content: (
               <DrawerScrollArea>
                 <Fieldset>
