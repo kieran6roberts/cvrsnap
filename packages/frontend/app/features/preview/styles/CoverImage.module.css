@@ -42,6 +42,8 @@
   gap: 1rem;
   padding: 1.5rem 1rem;
   z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
 
   &.highlighted {
     background-color: var(--mantine-color-gray-1);
@@ -50,7 +52,7 @@
       background-color: var(--mantine-color-dark-9);
     }
 
-    @media (min-width: em(992px)) {
+    @media (min-width: 992px) {
       border-radius: 1rem;
       border: 1px solid var(--mantine-color-gray-4);
       background-color: white;

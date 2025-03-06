@@ -254,53 +254,50 @@ export function BackgroundSettings() {
             label: 'Images',
             value: 'images',
             content: (
-              <DrawerScrollArea>
-                <Fieldset>
-                  {backgroundImage ? (
-                    <Stack>
-                      <Text fw={500} component="span">
-                        Upload background image
-                      </Text>
-                      <Image
-                        src={backgroundImage}
-                        radius="md"
-                        style={{ border: '1px solid var(--mantine-color-default-border)', aspectRatio: '16/9' }}
-                        alt="Background image"
-                        width="100%"
-                      />
-                      <Button aria-label="Remove background image" onClick={() => onBackgroundImageChange(null)}>
-                        Clear
-                      </Button>
-                    </Stack>
-                  ) : (
-                    <FileInput
-                      clearable
-                      description="Accepts PNG, JPEG, and WEBP"
-                      leftSection={<MediaImageFolder width={16} height={16} />}
-                      accept="image/png,image/jpeg,image/webp"
-                      label="Upload background image"
-                      placeholder="Click to upload"
-                      maw={368}
-                      onChange={onBackgroundImageChange}
+              <Fieldset>
+                {backgroundImage ? (
+                  <Stack>
+                    <Text fw={500} component="span">
+                      Upload background image
+                    </Text>
+                    <Image
+                      src={backgroundImage}
+                      radius="md"
+                      style={{ border: '1px solid var(--mantine-color-default-border)', aspectRatio: '16/9' }}
+                      alt="Background image"
+                      width="100%"
                     />
-                  )}
-                  {backgroundImage ? (
-                    <NumberInput
-                      defaultValue={0}
-                      max={1}
-                      min={0}
-                      step={0.1}
-                      decimalScale={1}
-                      onChange={(value) => {
-                        const percentage = value ? decimalToPercentage(Number(value)) : 0;
-                        updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
-                      }}
-                      label="Overlay opacity"
-                      allowNegative={false}
-                    />
-                  ) : null}
-                </Fieldset>
-              </DrawerScrollArea>
+                    <Button aria-label="Remove background image" onClick={() => onBackgroundImageChange(null)}>
+                      Clear
+                    </Button>
+                  </Stack>
+                ) : (
+                  <FileInput
+                    clearable
+                    description="Accepts PNG, JPEG, and WEBP"
+                    leftSection={<MediaImageFolder width={16} height={16} />}
+                    accept="image/png,image/jpeg,image/webp"
+                    label="Upload background image"
+                    placeholder="Click to upload"
+                    onChange={onBackgroundImageChange}
+                  />
+                )}
+                {backgroundImage ? (
+                  <NumberInput
+                    defaultValue={0}
+                    max={1}
+                    min={0}
+                    step={0.1}
+                    decimalScale={1}
+                    onChange={(value) => {
+                      const percentage = value ? decimalToPercentage(Number(value)) : 0;
+                      updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
+                    }}
+                    label="Overlay opacity"
+                    allowNegative={false}
+                  />
+                ) : null}
+              </Fieldset>
             )
           }
         ]}

@@ -1,7 +1,11 @@
 .tabsList {
   position: relative;
   justify-content: center;
-  margin-bottom: var(--mantine-spacing-md);
+  margin-bottom: 4rem;
+
+  @media (min-width: 992px) {
+    margin-bottom: 2rem;
+  }
 }
 
 .indicator {
@@ -21,10 +25,14 @@
   font-weight: 500;
   transition: color 100ms ease;
   color: var(--mantine-color-gray-7);
-  font-size: 13px;
+  font-size: 16px;
 
   &[data-active] {
     color: var(--mantine-color-black);
+  }
+
+  @media (min-width: 992px) {
+    font-size: 13px;
   }
 
   @mixin dark {

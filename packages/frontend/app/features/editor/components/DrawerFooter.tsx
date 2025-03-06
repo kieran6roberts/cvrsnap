@@ -114,7 +114,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
                 mt="auto"
               >
                 <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-                Save image
+                Finish and save
               </Button>
               <Button
                 className="plausible-event-name=Download+Image"
@@ -128,7 +128,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
                 mt="auto"
               >
                 <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-                Save image
+                Finish and save
               </Button>
             </Drawer.Body>
           </Drawer.Content>

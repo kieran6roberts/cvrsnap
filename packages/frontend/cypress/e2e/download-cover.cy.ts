@@ -28,8 +28,8 @@ context(`Download flow for ${SITE_NAME} cover`, () => {
 
     cy.log('User can download the cover image');
 
-    cy.findByRole('button', { name: 'Save image' }).should('exist');
-    cy.findByRole('button', { name: 'Save image' }).realClick();
+    cy.findByRole('button', { name: 'Finish and save' }).should('exist');
+    cy.findByRole('button', { name: 'Finish and save' }).realClick();
     cy.get('@downloadStub').should('have.been.calledOnce');
 
     cy.log('Download success modal should be shown');
