@@ -59,7 +59,7 @@ export function TextSettings() {
                   />
 
                   <ColorInput
-                    key={`color-${isResettingImage}`}
+                    key={`color1-${isResettingImage}`}
                     format="rgba"
                     description="Accepts RGBA"
                     defaultValue={primaryTextColor}
@@ -119,10 +119,11 @@ export function TextSettings() {
                   />
 
                   <ColorInput
+                    key={`color2-${isResettingImage}`}
                     format="rgba"
                     label="Color"
                     description="Accepts RGBA"
-                    value={secondaryTextColor}
+                    defaultValue={secondaryTextColor}
                     onChangeEnd={(value) => updateSecondaryText({ color: value as RGBAColor })}
                   />
 

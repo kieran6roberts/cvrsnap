@@ -251,9 +251,7 @@ context('Active cover Settings', () => {
       .should('exist')
       .and('have.value', newData.secondaryText);
 
-    // cy.findAllByRole('textbox', { name: 'Color' })
-    //   .should('exist')
-    //   .and('have.value', newData.secondaryColor);
+    cy.findAllByRole('textbox', { name: 'Color' }).should('exist').and('have.value', newData.secondaryColor);
 
     cy.findAllByPlaceholderText('Pick secondary font style').should('exist').and('have.value', newData.secondaryFont);
     cy.findAllByRole('textbox', { name: 'Secondary font size' })
