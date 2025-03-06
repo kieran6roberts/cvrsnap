@@ -22,9 +22,11 @@ I initially built this tool for myself because I wanted quick and simple blog co
 
 ## Screenshots
 
-<img width="1200" alt="CvrSnap home page screenshot" src="https://github.com/user-attachments/assets/9f09e4ba-bc8c-4d63-aaf2-ee3e73518928" />
 
-<img width="1200" alt="CvrSnap editor screenshot" src="https://github.com/user-attachments/assets/11e2ec74-5cf5-4597-a0df-0d71bc68ea97" />
+<img width="1200" alt="CvrSnap homepage" src="https://github.com/user-attachments/assets/84cf5a8d-fe74-4031-b8ca-1d8d114f500d" />
+
+<img width="1200" alt="CvrSnap editor" src="https://github.com/user-attachments/assets/a23df08b-8fc4-4462-a578-4e4bc4fe20da" />
+
 
 
 ## Features
