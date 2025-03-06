@@ -13,7 +13,7 @@ export const FEATURES = [
   {
     title: 'Instant image save',
     copy: '1 click cover image saving. No account required, no watermarks, and completely free. Save as many cover images as you need for your blog posts.',
-    icon: <DownloadCircle aria-hidden="true" width={32} height={32} color="var(--mantine-color-green-5" />,
+    icon: <DownloadCircle aria-hidden="true" width={32} height={32} color="var(--mantine-color-green-5)" />,
     renderHighlight: () => <FeatureSaveInteractive />,
     classNames: ['feature-section-small']
   },

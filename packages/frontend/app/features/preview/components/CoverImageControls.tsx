@@ -28,7 +28,6 @@ export function CoverImageControls({
       </Button>
 
       <Button
-        variant="primary"
         darkHidden
         disabled={isDownloadDisabled}
         {...(downloadImage ? { onClick: downloadImage } : {})}
@@ -37,7 +36,7 @@ export function CoverImageControls({
         className="plausible-event-name=Download+Image"
       >
         <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-        Save image
+        Finish and save
       </Button>
       <Button
         variant="white"
@@ -49,7 +48,7 @@ export function CoverImageControls({
         className="plausible-event-name=Download+Image"
       >
         <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
-        Save image
+        Finish and save
       </Button>
     </Flex>
   );
