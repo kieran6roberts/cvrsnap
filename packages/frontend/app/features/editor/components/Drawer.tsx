@@ -39,7 +39,7 @@ const editSections = [
   },
   {
     id: DRAWER_SECTIONS.info,
-    title: 'Info',
+    title: 'Help',
     color: 'teal.5',
     content: () => <InfoSection />,
     icon: <InfoCircle width={24} height={24} />
@@ -99,7 +99,7 @@ export function Drawer({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDiv
             const isActive = section.id === openSection;
 
             return (
-              <Stack key={section.id} align="center" justify="center">
+              <Stack key={section.id} align="center" justify="center" gap="xs">
                 <DrawerControl
                   key={section.id}
                   value={section.id}
@@ -111,7 +111,7 @@ export function Drawer({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDiv
                 >
                   {section.icon}
                 </DrawerControl>
-                <Text size="xs" ta="center" fw={500}>
+                <Text size="sm" ta="center" fw={500}>
                   {section.title}
                 </Text>
               </Stack>

@@ -1,0 +1,45 @@
+.tabsList {
+  position: relative;
+  justify-content: center;
+  margin-bottom: 4rem;
+
+  @media (min-width: 992px) {
+    margin-bottom: 2rem;
+  }
+}
+
+.indicator {
+  background-color: var(--mantine-color-white);
+  border-radius: var(--mantine-radius-md);
+  border: 1px solid var(--mantine-color-gray-2);
+  box-shadow: var(--mantine-shadow-sm);
+
+  @mixin dark {
+    background-color: var(--mantine-color-dark-6);
+    border-color: var(--mantine-color-dark-4);
+  }
+}
+
+.tabItem {
+  z-index: 1;
+  font-weight: 500;
+  transition: color 100ms ease;
+  color: var(--mantine-color-gray-7);
+  font-size: 16px;
+
+  &[data-active] {
+    color: var(--mantine-color-black);
+  }
+
+  @media (min-width: 992px) {
+    font-size: 13px;
+  }
+
+  @mixin dark {
+    color: var(--mantine-color-dark-1);
+
+    &[data-active] {
+      color: var(--mantine-color-white);
+    }
+  }
+}

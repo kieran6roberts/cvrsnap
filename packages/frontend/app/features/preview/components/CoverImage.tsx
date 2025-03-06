@@ -1,4 +1,4 @@
-import { Box, ActionIcon } from '@mantine/core';
+import { Box, ActionIcon, Tooltip } from '@mantine/core';
 import { ArrowRightTag } from 'iconoir-react';
 import { lazy } from 'react';
 import classNames from 'classnames';
@@ -43,19 +43,21 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
     <>
       <Box className={classNames(classes.coverWrapper, { [classes['highlighted']]: isDrawerOpen })}>
         {!isDrawerOpen ? (
-          <ActionIcon
-            visibleFrom="md"
-            pos="absolute"
-            top={16}
-            left={20}
-            onClick={() => setDrawerOpen(true)}
-            title="Open sidebar"
-            variant="default"
-            size={32}
-            aria-label="Open sidebar"
-          >
-            <ArrowRightTag width={18} height={18} />
-          </ActionIcon>
+          <Tooltip label="Open sidebar">
+            <ActionIcon
+              visibleFrom="md"
+              pos="absolute"
+              top={16}
+              left={20}
+              onClick={() => setDrawerOpen(true)}
+              title="Open sidebar"
+              variant="default"
+              size={32}
+              aria-label="Open sidebar"
+            >
+              <ArrowRightTag width={18} height={18} />
+            </ActionIcon>
+          </Tooltip>
         ) : null}
         {!isDrawerOpen ? (
           <Box visibleFrom="md" pos="absolute" top={16} right={20}>

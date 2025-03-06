@@ -11,13 +11,9 @@ context('Editor UI Store', () => {
     cy.findByRole('button', { name: 'Start editing' }).realClick();
 
     cy.findByRole('complementary').should('be.visible');
-    cy.findByRole('tab', { name: /Templates/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'true');
-    cy.findByRole('tab', { name: /Text/i }).should('exist').and('have.attr', 'aria-selected', 'false');
-    cy.findByRole('tab', { name: /Background/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Templates' }).should('exist').and('have.attr', 'aria-selected', 'true');
+    cy.findByRole('tab', { name: 'Text' }).should('exist').and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Background' }).should('exist').and('have.attr', 'aria-selected', 'false');
 
     cy.log('Close drawer');
 
@@ -38,13 +34,11 @@ context('Editor UI Store', () => {
     cy.findByRole('tab', { name: /Templates/i })
       .should('exist')
       .and('have.attr', 'aria-selected', 'true');
-    cy.findByRole('tab', { name: /Text/i }).should('exist').and('have.attr', 'aria-selected', 'false');
-    cy.findByRole('tab', { name: /Background/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Text' }).should('exist').and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Background' }).should('exist').and('have.attr', 'aria-selected', 'false');
 
     cy.log('Open Text section');
-    cy.findByRole('tab', { name: /Text/i }).should('exist').realClick();
+    cy.findByRole('tab', { name: 'Text' }).should('exist').realClick();
 
     cy.log('Reload. Drawer should be closed, Text section should be open');
 
@@ -53,29 +47,17 @@ context('Editor UI Store', () => {
     cy.findByRole('heading', { name: 'Hey 👋' }).should('not.exist');
     cy.findByRole('complementary').should('exist');
 
-    cy.findByRole('tab', { name: /Templates/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'false');
-    cy.findByRole('tab', { name: /Text/i }).should('exist').and('have.attr', 'aria-selected', 'true');
-    cy.findByRole('tab', { name: /Background/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'false');
-    cy.findByRole('tab', { name: /Background/i })
-      .should('exist')
-      .realClick();
+    cy.findByRole('tab', { name: 'Templates' }).should('exist').and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Text' }).should('exist').and('have.attr', 'aria-selected', 'true');
+    cy.findByRole('tab', { name: 'Background' }).should('exist').and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Background' }).should('exist').realClick();
 
-    cy.findByRole('tab', { name: /Background/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'true');
+    cy.findByRole('tab', { name: 'Background' }).should('exist').and('have.attr', 'aria-selected', 'true');
 
     cy.reload();
 
-    cy.findByRole('tab', { name: /Background/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'true');
-    cy.findByRole('tab', { name: /Templates/i })
-      .should('exist')
-      .and('have.attr', 'aria-selected', 'false');
-    cy.findByRole('tab', { name: /Text/i }).should('exist').and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Background' }).should('exist').and('have.attr', 'aria-selected', 'true');
+    cy.findByRole('tab', { name: 'Templates' }).should('exist').and('have.attr', 'aria-selected', 'false');
+    cy.findByRole('tab', { name: 'Text' }).should('exist').and('have.attr', 'aria-selected', 'false');
   });
 });

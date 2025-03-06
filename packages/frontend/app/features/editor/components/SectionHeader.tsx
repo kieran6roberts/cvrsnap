@@ -23,7 +23,7 @@ export function SectionHeader() {
           </ActionIcon>
         </Tooltip>
       </Flex>
-      <GitHubStarButton fullWidth visibleFrom="sm" size="sm" variant="outline" />
+      <GitHubStarButton fullWidth visibleFrom="sm" size="sm" variant="primary" bg="teal.6" />
       <Divider />
     </Stack>
   );
