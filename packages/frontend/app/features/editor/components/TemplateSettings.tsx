@@ -1,4 +1,4 @@
-import { SimpleGrid, Stack, Fieldset } from '@mantine/core';
+import { SimpleGrid, Fieldset } from '@mantine/core';
 import classnames from 'classnames';
 
 import classes from '~/features/editor/styles/TemplatePreview.module.css';
@@ -7,6 +7,7 @@ import { BACKGROUND_TEMPLATES, LAYOUT_TEMPLATES } from '~/features/editor/consts
 import { TemplatePreview } from '~/features/editor/components/TemplatePreview';
 import { DrawerScrollArea } from '~/features/editor/components/DrawerScrollArea';
 import { SectionHeader } from '~/features/editor/components/SectionHeader';
+import { SettingsTabs } from '~/features/editor/components/SettingsTabs';
 
 export function TemplateSettings() {
   const { template, updateTemplate } = useEditor();
@@ -14,60 +15,80 @@ export function TemplateSettings() {
   return (
     <>
       <SectionHeader />
-      <DrawerScrollArea>
-        <Stack gap={32} pb={{ base: 90, md: 16 }} mt={16}>
-          <Fieldset legend="Background split">
-            <SimpleGrid cols={{ base: 1, xs: 3, md: 2 }} spacing="xs" verticalSpacing="xl" component="section">
-              {BACKGROUND_TEMPLATES.map((t) => {
-                const isSelected = template.backgroundId === t.id;
-                return (
-                  <TemplatePreview
-                    key={t.id}
-                    templateName={t.name}
-                    isSelected={isSelected}
-                    onTemplateUpdate={() => updateTemplate({ ...template, backgroundId: t.id })}
-                  >
-                    <div className={classes['previewPaper-content']}>
-                      {t.sections?.map((section, index) => (
-                        <div
-                          className={classes[`backgroundTemplate-previewSection--${index + 1}`]}
-                          key={index}
-                          style={{
-                            position: 'absolute',
-                            inset: 0,
-                            zIndex: 1,
-                            clipPath: section.clipPath
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </TemplatePreview>
-                );
-              })}
-            </SimpleGrid>
-          </Fieldset>
-          <Fieldset legend="Text layout">
-            <SimpleGrid cols={{ base: 1, xs: 3, md: 2 }} spacing="xs" verticalSpacing="xl" component="section">
-              {LAYOUT_TEMPLATES.map((t) => {
-                const isSelected = template.layoutId === t.id;
-                return (
-                  <TemplatePreview
-                    key={t.id}
-                    templateName={t.name}
-                    isSelected={isSelected}
-                    onTemplateUpdate={() => updateTemplate({ ...template, layoutId: t.id })}
-                  >
-                    <div className={classnames(t.previewStyles.cover, classes['previewPaper-content'])}>
-                      <div className={classnames(classes['previewBar--wide'], t.previewStyles.primaryText ?? '')} />
-                      <div className={classnames(classes['previewBar--narrow'], t.previewStyles.secondaryText ?? '')} />
-                    </div>
-                  </TemplatePreview>
-                );
-              })}
-            </SimpleGrid>
-          </Fieldset>
-        </Stack>
-      </DrawerScrollArea>
+      <SettingsTabs
+        tabs={[
+          {
+            label: 'Design',
+            value: 'design',
+            content: (
+              <DrawerScrollArea>
+                <Fieldset>
+                  <SimpleGrid cols={{ base: 1, xs: 3, md: 2 }} spacing="xs" verticalSpacing="xl" component="section">
+                    {BACKGROUND_TEMPLATES.map((t) => {
+                      const isSelected = template.backgroundId === t.id;
+                      return (
+                        <TemplatePreview
+                          key={t.id}
+                          templateName={t.name}
+                          isSelected={isSelected}
+                          onTemplateUpdate={() => updateTemplate({ ...template, backgroundId: t.id })}
+                        >
+                          <div className={classes['previewPaper-content']}>
+                            {t.sections?.map((section, index) => (
+                              <div
+                                className={classes[`backgroundTemplate-previewSection--${index + 1}`]}
+                                key={index}
+                                style={{
+                                  position: 'absolute',
+                                  inset: 0,
+                                  zIndex: 1,
+                                  clipPath: section.clipPath
+                                }}
+                              />
+                            ))}
+                          </div>
+                        </TemplatePreview>
+                      );
+                    })}
+                  </SimpleGrid>
+                </Fieldset>
+              </DrawerScrollArea>
+            )
+          },
+          {
+            label: 'Contents',
+            value: 'contents',
+            content: (
+              <DrawerScrollArea>
+                <Fieldset>
+                  <SimpleGrid cols={{ base: 1, xs: 3, md: 2 }} spacing="xs" verticalSpacing="xl" component="section">
+                    {LAYOUT_TEMPLATES.map((t) => {
+                      const isSelected = template.layoutId === t.id;
+                      return (
+                        <TemplatePreview
+                          key={t.id}
+                          templateName={t.name}
+                          isSelected={isSelected}
+                          onTemplateUpdate={() => updateTemplate({ ...template, layoutId: t.id })}
+                        >
+                          <div className={classnames(t.previewStyles.cover, classes['previewPaper-content'])}>
+                            <div
+                              className={classnames(classes['previewBar--wide'], t.previewStyles.primaryText ?? '')}
+                            />
+                            <div
+                              className={classnames(classes['previewBar--narrow'], t.previewStyles.secondaryText ?? '')}
+                            />
+                          </div>
+                        </TemplatePreview>
+                      );
+                    })}
+                  </SimpleGrid>
+                </Fieldset>
+              </DrawerScrollArea>
+            )
+          }
+        ]}
+      />
     </>
   );
 }
