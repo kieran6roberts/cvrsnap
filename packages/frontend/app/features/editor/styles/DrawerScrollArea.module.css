@@ -1,0 +1,9 @@
+.scrollArea {
+  flex: 1;
+  padding: 0 var(--mantine-spacing-sm);
+  height: calc(100vh - 45px);
+
+  @media (min-width: em(992px)) {
+    height: calc(100vh - 260px);
+  }
+}

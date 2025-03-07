@@ -1,10 +1,10 @@
-import { Flex, Text, Button, Drawer, LoadingOverlay, Stack } from '@mantine/core';
+import { Flex, Text, Button, Drawer, LoadingOverlay, Stack, ActionIcon } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 
 import { ImagePreview } from '~/features/preview/components/ImagePreview';
 import { useEditor } from '~/shared/stores/EditorContext';
 import classes from '../styles/EditorDrawer.module.css';
-import { Download } from 'iconoir-react';
+import { DownloadCircle, FastArrowUp } from 'iconoir-react';
 import { useImageDownload } from '~/shared/hooks/useImageDownload';
 import { DownloadSuccessModal } from '~/shared/components/DownloadSuccessModal';
 import { CoverImageSize } from '~/shared/components/CoverImageSize';
@@ -62,9 +62,21 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
           </a>
         </Text>
 
-        <Button hiddenFrom="md" onClick={resetEditor} variant="outline" size="sm">
-          Reset all
-        </Button>
+        <Flex gap="md" align="center">
+          <Button hiddenFrom="md" onClick={resetEditor} variant="outline" size="sm">
+            Reset all
+          </Button>
+          <ActionIcon
+            aria-label="Scroll to top of the page"
+            hiddenFrom="md"
+            onClick={() => window.scrollTo({ top: 0 })}
+            variant="outline"
+            size="lg"
+          >
+            <FastArrowUp />
+          </ActionIcon>
+        </Flex>
+
         <Button hiddenFrom="md" darkHidden variant="primary" onClick={open} size="sm">
           Preview/Save
         </Button>
@@ -110,7 +122,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
                 darkHidden
                 onClick={onDownloadImage}
                 size="md"
-                rightSection={<Download width={24} height={24} />}
+                rightSection={<DownloadCircle width={24} height={24} />}
                 mt="auto"
               >
                 <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />
@@ -124,7 +136,7 @@ export function DrawerFooter({ resetEditor, imageNodeRef }: DrawerFooterProps) {
                 hiddenFrom="md"
                 onClick={onDownloadImage}
                 size="sm"
-                rightSection={<Download width={24} height={24} />}
+                rightSection={<DownloadCircle width={24} height={24} />}
                 mt="auto"
               >
                 <LoadingOverlay visible={isLoading} zIndex={1000} overlayProps={{ radius: 'sm', blur: 2 }} />

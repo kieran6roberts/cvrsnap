@@ -95,7 +95,8 @@ const theme = createTheme({
     },
     SelectItem: {
       defaultProps: {
-        radius: 'xl'
+        radius: 'xl',
+        size: 'sm'
       }
     },
     TextInput: {

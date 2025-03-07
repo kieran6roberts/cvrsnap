@@ -18,7 +18,9 @@ export function CoverImageSize({
   return (
     <Select
       w={width}
+      size="md"
       maw={275}
+      aria-label="Cover image size"
       value={defaultImageSize}
       data={Object.values(IMAGE_DOWNLOAD_SIZES).map((size) => ({
         value: size.value,

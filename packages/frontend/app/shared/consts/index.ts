@@ -45,14 +45,14 @@ export const IMAGE_DOWNLOAD_SIZES = {
     aspectRatio: 2.38
   },
   mediumRegular: {
-    label: '(Medium: standard)',
+    label: '(Medium)',
     value: 'medium-regular:2:1500x750',
     width: 1500,
     height: 750,
     aspectRatio: 2
   },
   mediumLarge: {
-    label: '(Medium: large)',
+    label: '(Medium)',
     value: 'medium-large:2:2500x1250',
     width: 2500,
     height: 1250,

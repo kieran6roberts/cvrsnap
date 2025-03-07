@@ -7,7 +7,7 @@ import { useEditorUIStore } from '~/shared/stores/EditorUIStore';
 export function SectionHeader() {
   const { setDrawerOpen } = useEditorUIStore();
   return (
-    <Stack p="sm" gap="lg" visibleFrom="md">
+    <Stack px="sm" py="lg" gap="lg" visibleFrom="md">
       <Flex justify="space-between" align="center">
         <Logo />
         <Tooltip label="Close sidebar">

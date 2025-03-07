@@ -19,12 +19,13 @@ import * as patterns from 'hero-patterns';
 import { useEditor } from '~/shared/stores/EditorContext';
 import { updateCSSVariables } from '~/shared/utils/styles';
 import classes from '~/features/editor/styles/BackgroundSection.module.css';
-import { decimalToPercentage } from '~/features/editor/utils';
+import { decimalToPercentage, splitAndCapitalizeCamelCase } from '~/features/editor/utils';
 import { BACKGROUND_TEMPLATES } from '../consts/templates';
 import { RGBAColor, HEXColor } from '~/shared/consts';
 import { DrawerScrollArea } from '~/features/editor/components/DrawerScrollArea';
 import { SectionHeader } from '~/features/editor/components/SectionHeader';
 import { SettingsTabs } from '~/features/editor/components/SettingsTabs';
+import backgroundSettingsClasses from '~/features/editor/styles/BackgroundSettings.module.css';
 
 export function BackgroundSettings() {
   const {
@@ -137,6 +138,7 @@ export function BackgroundSettings() {
                   <SimpleGrid cols={{ base: 1, xs: 3, md: 2 }} spacing="sm" verticalSpacing="xl" component="section">
                     {Object.entries(patterns).map(([key, value]) => {
                       const isSelected = backgroundPattern.name === key;
+                      const formattedTemplateName = splitAndCapitalizeCamelCase(key);
                       return (
                         <Stack key={key} gap={4} component="article">
                           <Text
@@ -150,7 +152,7 @@ export function BackgroundSettings() {
                               overflow: 'hidden'
                             }}
                           >
-                            {key}
+                            {formattedTemplateName}
                           </Text>
 
                           <UnstyledButton
@@ -255,23 +257,7 @@ export function BackgroundSettings() {
             value: 'images',
             content: (
               <Fieldset>
-                {backgroundImage ? (
-                  <Stack>
-                    <Text fw={500} component="span">
-                      Upload background image
-                    </Text>
-                    <Image
-                      src={backgroundImage}
-                      radius="md"
-                      style={{ border: '1px solid var(--mantine-color-default-border)', aspectRatio: '16/9' }}
-                      alt="Background image"
-                      width="100%"
-                    />
-                    <Button aria-label="Remove background image" onClick={() => onBackgroundImageChange(null)}>
-                      Clear
-                    </Button>
-                  </Stack>
-                ) : (
+                <Stack px="sm">
                   <FileInput
                     clearable
                     description="Accepts PNG, JPEG, and WEBP"
@@ -280,23 +266,56 @@ export function BackgroundSettings() {
                     label="Upload background image"
                     placeholder="Click to upload"
                     onChange={onBackgroundImageChange}
+                    disabled={!!backgroundImage}
                   />
-                )}
-                {backgroundImage ? (
-                  <NumberInput
-                    defaultValue={0}
-                    max={1}
-                    min={0}
-                    step={0.1}
-                    decimalScale={1}
-                    onChange={(value) => {
-                      const percentage = value ? decimalToPercentage(Number(value)) : 0;
-                      updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
-                    }}
-                    label="Overlay opacity"
-                    allowNegative={false}
-                  />
-                ) : null}
+                  {backgroundImage ? (
+                    <>
+                      <Image
+                        src={backgroundImage}
+                        radius="md"
+                        style={{ border: '1px solid var(--mantine-color-default-border)', aspectRatio: '16/9' }}
+                        alt="Background image"
+                        width="100%"
+                      />
+                      <Button
+                        lightHidden
+                        variant="primary"
+                        aria-label="Remove background image"
+                        onClick={() => onBackgroundImageChange(null)}
+                      >
+                        Remove image
+                      </Button>
+                      <Button
+                        darkHidden
+                        aria-label="Remove background image"
+                        onClick={() => onBackgroundImageChange(null)}
+                      >
+                        Remove image
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      <div className={backgroundSettingsClasses['background-image-placeholder']}>
+                        Image will appear here
+                      </div>
+                    </>
+                  )}
+                  {backgroundImage ? (
+                    <NumberInput
+                      defaultValue={0}
+                      max={1}
+                      min={0}
+                      step={0.1}
+                      decimalScale={1}
+                      onChange={(value) => {
+                        const percentage = value ? decimalToPercentage(Number(value)) : 0;
+                        updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
+                      }}
+                      label="Overlay opacity"
+                      allowNegative={false}
+                    />
+                  ) : null}
+                </Stack>
               </Fieldset>
             )
           }
