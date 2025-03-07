@@ -9,8 +9,4 @@
   height: 100%;
   border-radius: var(--mantine-radius-md);
   color: var(--mantine-color-dimmed);
-
-  &:focus {
-    background-color: pink;
-  }
 }
