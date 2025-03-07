@@ -24,7 +24,7 @@ export function CoverImageControls({
   return (
     <Flex gap="xs" justify="center" wrap="wrap" visibleFrom="md">
       <Button onClick={resetStyles} size="md" rightSection={<RefreshCircle width={24} height={24} />} variant="outline">
-        Reset cover
+        Reset
       </Button>
 
       <Button

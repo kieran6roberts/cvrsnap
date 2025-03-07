@@ -59,10 +59,12 @@
   &-controls {
     justify-content: center;
     border-bottom: 1px solid var(--mantine-color-default-border);
+    border-top: 1px solid var(--mantine-color-default-border);
 
     @media (min-width: em(992px)) {
       justify-content: flex-start;
       border-bottom: none;
+      border-top: none;
     }
   }
 
