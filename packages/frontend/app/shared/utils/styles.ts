@@ -11,6 +11,7 @@ export const updateCSSVariables = (variables: Partial<Record<CSSVariableKey, str
 export const getAspectRatioData = (value: DownloadSizeInfo) => {
   const [id, aspectRatio, size] = value.split(':');
   const [width, height] = size.split('x');
+
   return {
     id,
     aspectRatio: Number(aspectRatio),

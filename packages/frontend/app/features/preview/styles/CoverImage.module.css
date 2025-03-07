@@ -28,6 +28,8 @@
   --cover-secondary-right: unset;
   --cover-secondary-left: unset;
   --cover-secondary-position: relative;
+
+  --cover-zoom: scale(1);
 }
 
 .coverWrapper {
@@ -41,6 +43,7 @@
   text-align: center;
   gap: 1rem;
   padding: 1.5rem 1rem;
+  overflow: hidden;
   z-index: 2;
   margin: 0 auto;
   background-image: radial-gradient(var(--mantine-color-violet-2) 1px, transparent 1px);
@@ -65,20 +68,24 @@
 
 .coverSkeleton {
   display: block;
-  width: min(calc(90vw - 360px), 900px);
+  width: min(calc(90vw - 360px), 800px);
   margin: 0 auto;
   min-width: 320px;
   aspect-ratio: var(--cover-aspect-ratio);
   overflow: hidden;
   z-index: 99;
   padding: 2rem;
+  transform: scale(1);
 }
 
 .innerCover {
   width: 100%;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
-  @media (min-width: em(992px)) {
-    width: min(calc(90vw - 360px), 900px);
+  @media (min-width: 992px) {
+    transform: var(--cover-zoom);
+    transform-origin: center center;
+    transition: transform 0.2s ease;
+    width: min(calc(90vw - 360px), 800px);
   }
 }

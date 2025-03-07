@@ -6,19 +6,20 @@ export function CoverImageSize({
   defaultImageSize,
   onAspectRatioChange,
   width = '275px',
+  size = 'md',
   ...rest
 }: {
   defaultImageSize: string;
   onAspectRatioChange: (value: string | null) => void;
   label?: string;
   width?: string;
-
+  size?: 'sm' | 'md';
   rest?: SelectProps;
 }) {
   return (
     <Select
       w={width}
-      size="md"
+      size={size}
       maw={275}
       aria-label="Cover image size"
       value={defaultImageSize}
@@ -31,6 +32,7 @@ export function CoverImageSize({
       allowDeselect={false}
       comboboxProps={{ width: '300px', position: 'bottom' }}
       checkIconPosition="right"
+      maxDropdownHeight={500}
       {...rest}
     />
   );
