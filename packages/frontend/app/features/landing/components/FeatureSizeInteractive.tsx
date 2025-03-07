@@ -17,6 +17,7 @@ export function FeatureSizeInteractive() {
       defaultImageSize={imageSize}
       onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
       width="100%"
+      size="sm"
     />
   );
 }

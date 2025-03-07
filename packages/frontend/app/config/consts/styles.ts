@@ -27,6 +27,7 @@ export const PREVIEW_VARIABLE_NAMES = {
     display: '--cover-display',
     justifyContent: '--cover-justify-content',
     alignItems: '--cover-align-items',
-    flexDirection: '--cover-flex-direction'
+    flexDirection: '--cover-flex-direction',
+    zoom: '--cover-zoom'
   }
 } as const;
