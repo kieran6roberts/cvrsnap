@@ -12,8 +12,11 @@ import { updateCSSVariables, getAspectRatioData } from '~/shared/utils/styles';
 import { CoverImageControls } from '~/features/preview/components/CoverImageControls';
 import { CoverImageSize } from '~/shared/components/CoverImageSize';
 import { useEditorUIStore } from '~/shared/stores/EditorUIStore';
-import type { DownloadSizeInfo } from '~/shared/consts';
 import { Logo } from '~/shared/components/Logo';
+import { ZoomControl } from '~/features/preview/components/ZoomControl';
+
+import type { DownloadSizeInfo } from '~/shared/consts';
+
 const Confetti = lazy(() => import('~/features/preview/components/Confetti'));
 
 export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDivElement | null> }) {
@@ -88,6 +91,9 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
         ) : null}
 
         <ImagePreview imageNodeRef={imageNodeRef} />
+        <Box visibleFrom="lg" pos="absolute" bottom={16} left={20}>
+          <ZoomControl />
+        </Box>
       </Box>
 
       {isSuccessModalOpen && <DownloadSuccessModal close={closeSuccessModal} />}
