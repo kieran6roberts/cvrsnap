@@ -1,8 +1,13 @@
-import { ScrollArea } from '@mantine/core';
+import { Box, ScrollArea } from '@mantine/core';
+import classes from '~/features/editor/styles/DrawerScrollArea.module.css';
+
 export function DrawerScrollArea({ children }: { children: React.ReactNode }) {
   return (
-    <ScrollArea scrollbarSize={8} flex={1} h="calc(100vh - 250px)" px="sm">
-      {children}
-    </ScrollArea>
+    <>
+      <ScrollArea visibleFrom="md" scrollbarSize={8} className={classes.scrollArea}>
+        {children}
+      </ScrollArea>
+      <Box hiddenFrom="md">{children}</Box>
+    </>
   );
 }

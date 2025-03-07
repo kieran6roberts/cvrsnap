@@ -93,7 +93,7 @@ export function Drawer({ imageNodeRef }: { imageNodeRef: React.RefObject<HTMLDiv
 
         <Tabs.Panel value={openSection}>{editSections[openSectionIndex].content()}</Tabs.Panel>
       </Tabs>
-      <Flex direction="column" hiddenFrom="md" variant="none" pos="sticky" top={0}>
+      <Flex direction="column" hiddenFrom="md" variant="none" pb="5rem">
         <Flex direction="row" component="section" className={classes['sidebar-controls']} gap="md" p="md">
           {editSections.map((section) => {
             const isActive = section.id === openSection;

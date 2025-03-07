@@ -42,39 +42,24 @@
   gap: 1rem;
   padding: 1.5rem 1rem;
   z-index: 2;
-  max-width: 1200px;
   margin: 0 auto;
+  background-image: radial-gradient(var(--mantine-color-violet-2) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: -20px -20px;
 
-  &.highlighted {
-    background-color: var(--mantine-color-gray-1);
-
-    [data-mantine-color-scheme='dark'] & {
-      background-color: var(--mantine-color-dark-9);
-    }
-
-    @media (min-width: 992px) {
-      border-radius: 1rem;
-      border: 1px solid var(--mantine-color-gray-4);
-      background-color: white;
-      max-width: 1200px;
-      margin: 0.6rem 0.6rem 0 0.6rem;
-      box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-
-      [data-mantine-color-scheme='dark'] & {
-        background-color: var(--mantine-color-dark-9);
-        border-color: var(--mantine-color-dark-5);
-      }
-    }
-
-    @media (min-width: em(1700px)) {
-      margin: 0 auto;
-    }
+  [data-mantine-color-scheme='dark'] & {
+    background-image: radial-gradient(var(--mantine-color-dark-4) 1px, transparent 1px);
   }
 
   @media (min-width: em(992px)) {
+    border-radius: 1rem;
+    height: calc(100vh - 120px);
+    border: 1px solid var(--mantine-color-gray-4);
     gap: 2rem;
-    flex: 1;
-    padding: 2rem;
+
+    [data-mantine-color-scheme='dark'] & {
+      border-color: var(--mantine-color-dark-5);
+    }
   }
 }
 

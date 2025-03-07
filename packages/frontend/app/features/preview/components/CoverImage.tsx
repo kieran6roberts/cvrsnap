@@ -1,4 +1,4 @@
-import { Box, ActionIcon, Tooltip } from '@mantine/core';
+import { Box, ActionIcon, Tooltip, Flex, Container } from '@mantine/core';
 import { ArrowRightTag } from 'iconoir-react';
 import { lazy } from 'react';
 import classNames from 'classnames';
@@ -40,8 +40,30 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
   };
 
   return (
-    <>
-      <Box className={classNames(classes.coverWrapper, { [classes['highlighted']]: isDrawerOpen })}>
+    <Container fluid style={{ flex: 1 }}>
+      <Flex
+        align="center"
+        justify={{ base: 'center', md: 'space-between' }}
+        style={{ borderBottom: !isDrawerOpen ? '1px solid var(--mantine)' : 'none' }}
+        p="sm"
+        h={80}
+      >
+        <CoverImageSize
+          width="220px"
+          defaultImageSize={defaultImageSize}
+          onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
+        />
+
+        <CoverImageControls
+          {...(isDownloadDisabled
+            ? {
+                isDownloadDisabled: true
+              }
+            : { isLoading, resetStyles, downloadImage, isDownloadDisabled: false })}
+        />
+      </Flex>
+
+      <Box className={classNames(classes.coverWrapper)}>
         {!isDrawerOpen ? (
           <Tooltip label="Open sidebar">
             <ActionIcon
@@ -65,25 +87,11 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
           </Box>
         ) : null}
 
-        <CoverImageSize
-          label="Image size"
-          defaultImageSize={defaultImageSize}
-          onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
-        />
-
         <ImagePreview imageNodeRef={imageNodeRef} />
-
-        <CoverImageControls
-          {...(isDownloadDisabled
-            ? {
-                isDownloadDisabled: true
-              }
-            : { isLoading, resetStyles, downloadImage, isDownloadDisabled: false })}
-        />
       </Box>
 
       {isSuccessModalOpen && <DownloadSuccessModal close={closeSuccessModal} />}
       {isSuccessModalOpen && <Confetti />}
-    </>
+    </Container>
   );
 }
