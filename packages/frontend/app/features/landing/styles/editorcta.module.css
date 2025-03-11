@@ -9,7 +9,6 @@
   background: linear-gradient(to bottom, var(--mantine-color-violet-7), var(--mantine-color-violet-4));
   border-radius: var(--mantine-radius-lg);
   box-shadow: var(--mantine-shadow-md);
-  z-index: 100;
   max-width: 750px;
   margin: 0 auto;
   font-size: 0.8rem;
