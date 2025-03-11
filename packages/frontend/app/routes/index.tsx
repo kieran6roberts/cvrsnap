@@ -9,6 +9,7 @@ import { CoverExampleList } from '~/features/landing/components/CoverExampleList
 import { SectionContainer } from '~/features/landing/components/SectionContainer';
 import { SectionHeader } from '~/features/landing/components/SectionHeader';
 import { Hero } from '~/features/landing/components/Hero';
+import { EditorCTA } from '~/features/landing/components/EditorCTA';
 
 export const meta: MetaFunction = () => {
   const title = `${SITE_NAME} - Effortless Blog Cover Design Tool`;
@@ -30,6 +31,9 @@ export default function Index() {
             copy="CvrSnap is a blog cover design tool that helps you create stunning blog cover images in seconds with easy-to-use templates and editing tools. Here are some of the features that make it so great."
           />
           <FeatureList />
+        </SectionContainer>
+        <SectionContainer>
+          <EditorCTA />
         </SectionContainer>
       </Container>
       <Footer />
