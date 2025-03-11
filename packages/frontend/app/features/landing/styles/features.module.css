@@ -8,8 +8,11 @@
   background-color: var(--mantine-color-gray-0);
   border: 1px solid var(--mantine-color-gray-2);
   z-index: 1;
-  padding: 2rem;
-  margin-bottom: 6rem;
+  padding: 0.5rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
 
   [data-mantine-color-scheme='dark'] & {
     background-color: var(--mantine-color-dark-9);
@@ -50,10 +53,10 @@
     gap: 0.5rem;
     font-size: 0.8em;
     font-weight: 600;
-    color: var(--mantine-color-dark-7);
+    color: var(--mantine-color-dark-9);
 
     [data-mantine-color-scheme='dark'] & {
-      color: var(--mantine-color-gray-3);
+      color: var(--mantine-color-gray-1);
     }
   }
 
@@ -67,10 +70,10 @@
   .feature-description {
     font-size: 0.6em;
     font-weight: 400;
-    color: var(--mantine-color-gray-7);
+    color: var(--mantine-color-gray-8);
 
     [data-mantine-color-scheme='dark'] & {
-      color: var(--mantine-color-gray-6);
+      color: var(--mantine-color-gray-3);
     }
   }
 
@@ -85,6 +88,10 @@
     padding: 1rem;
     background-color: var(--mantine-color-gray-1);
     border-radius: var(--feature-border-radius);
+
+    @media (min-width: 768px) {
+      padding: 2rem;
+    }
 
     [data-mantine-color-scheme='dark'] & {
       background-color: var(--mantine-color-dark-8);
