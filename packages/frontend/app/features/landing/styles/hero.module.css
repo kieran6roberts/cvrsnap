@@ -40,12 +40,17 @@
 
     &--copy {
       align-self: center;
-      color: var(--mantine-color-gray-6);
+      color: var(--mantine-color-dark-8);
       max-width: 490px;
       font-weight: 500;
+      font-size: 1rem;
+
+      @media (min-width: 768px) {
+        font-size: 1.1rem;
+      }
 
       [data-mantine-color-scheme='dark'] & {
-        color: var(--mantine-color-gray-7);
+        color: var(--mantine-color-gray-3);
       }
     }
 

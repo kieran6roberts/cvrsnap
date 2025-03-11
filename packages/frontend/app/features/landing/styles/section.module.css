@@ -1,10 +1,10 @@
 .landing-section {
   position: relative;
   border-bottom: 1px solid var(--mantine-color-gray-3);
-  margin-top: 6rem;
+  padding: 4rem 0;
 
   @media (min-width: 768px) {
-    padding: 0 1rem;
+    padding: 5rem 1rem;
   }
 
   [data-mantine-color-scheme='dark'] & {
