@@ -132,16 +132,28 @@ export const useEditor = create(
           const cssUpdates: Partial<Record<CSSVariableKey, string>> = {};
 
           if (updates.colors?.color1) {
-            cssUpdates['--cover-background-color-1'] = updates.colors?.color1;
+            cssUpdates['--cover-background-color-1'] = updates.colors.color1;
           }
           if (updates.colors?.color2) {
-            cssUpdates['--cover-background-color-2'] = updates.colors?.color2;
+            cssUpdates['--cover-background-color-2'] = updates.colors.color2;
           }
           if (updates.colors?.color3) {
-            cssUpdates['--cover-background-color-3'] = updates.colors?.color3;
+            cssUpdates['--cover-background-color-3'] = updates.colors.color3;
           }
           if (updates.colors?.color4) {
-            cssUpdates['--cover-background-color-4'] = updates.colors?.color4;
+            cssUpdates['--cover-background-color-4'] = updates.colors.color4;
+          }
+          if (updates.gradients?.gradient1) {
+            cssUpdates['--cover-background-gradient-1'] = updates.gradients.gradient1;
+          }
+          if (updates.gradients?.gradient2) {
+            cssUpdates['--cover-background-gradient-2'] = updates.gradients.gradient2;
+          }
+          if (updates.gradients?.gradient3) {
+            cssUpdates['--cover-background-gradient-3'] = updates.gradients.gradient3;
+          }
+          if (updates.gradients?.gradient4) {
+            cssUpdates['--cover-background-gradient-4'] = updates.gradients.gradient4;
           }
 
           if (Object.keys(cssUpdates).length > 0) {
@@ -224,6 +236,10 @@ export const useEditor = create(
           '--cover-background-color-2': DEFAULT_EDITOR_STATE.background.colors?.color2 ?? 'rgba(51, 51, 51, 1)',
           '--cover-background-color-3': DEFAULT_EDITOR_STATE.background.colors?.color3 ?? 'rgba(51, 51, 51, 1)',
           '--cover-background-color-4': DEFAULT_EDITOR_STATE.background.colors?.color4 ?? 'rgba(51, 51, 51, 1)',
+          '--cover-background-gradient-1': '',
+          '--cover-background-gradient-2': '',
+          '--cover-background-gradient-3': '',
+          '--cover-background-gradient-4': '',
 
           /* Cover Aspect Ratio */
           '--cover-aspect-ratio': `${(DEFAULT_EDITOR_STATE.cover.width / DEFAULT_EDITOR_STATE.cover.height).toFixed(1)}`
@@ -263,7 +279,8 @@ export const useEditor = create(
         secondaryText: state.secondaryText,
         background: {
           colors: state.background.colors,
-          pattern: state.background.pattern
+          pattern: state.background.pattern,
+          gradients: state.background.gradients
         },
         cover: state.cover
       }),
@@ -317,6 +334,10 @@ export function EditorHydration({ children, skeleton }: { children: React.ReactN
       '--cover-background-color-2': state.background.colors?.color2 ?? 'rgba(51, 51, 51, 1)',
       '--cover-background-color-3': state.background.colors?.color3 ?? 'rgba(51, 51, 51, 1)',
       '--cover-background-color-4': state.background.colors?.color4 ?? 'rgba(51, 51, 51, 1)',
+      '--cover-background-gradient-1': state.background.gradients?.gradient1 ?? '',
+      '--cover-background-gradient-2': state.background.gradients?.gradient2 ?? '',
+      '--cover-background-gradient-3': state.background.gradients?.gradient3 ?? '',
+      '--cover-background-gradient-4': state.background.gradients?.gradient4 ?? '',
       /*
       '--cover-align-items
       '--cover-primary-text-align

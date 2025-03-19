@@ -10,13 +10,12 @@ export function ImagePreview({ imageNodeRef }: { imageNodeRef: React.RefObject<H
     primaryText,
     secondaryText,
     isResettingImage,
-    background: { image: backgroundImage, pattern: backgroundPattern },
+    background: { image: backgroundImage, pattern: backgroundPattern, gradients: backgroundGradients },
     cover
   } = useEditor();
 
   const backgroundTemplate = BACKGROUND_TEMPLATES.find((t) => t.id === backgroundId);
   const { sections: backgroundSections } = backgroundTemplate ?? {};
-  const is3DotTemplate = backgroundTemplate?.id === 'window';
 
   return (
     <EditorHydration skeleton={<Skeleton radius={12} className={classes.coverSkeleton} animate />}>
@@ -26,7 +25,9 @@ export function ImagePreview({ imageNodeRef }: { imageNodeRef: React.RefObject<H
           component="div"
           ref={imageNodeRef}
           style={{
-            backgroundColor: 'var(--cover-background-color-1)',
+            background: backgroundGradients?.gradient1
+              ? 'var(--cover-background-gradient-1)'
+              : 'var(--cover-background-color-1)',
             display: 'var(--cover-display)',
             justifyContent: 'var(--cover-justify-content)',
             alignItems: 'var(--cover-align-items)',
@@ -52,8 +53,10 @@ export function ImagePreview({ imageNodeRef }: { imageNodeRef: React.RefObject<H
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    zIndex: is3DotTemplate ? 3 : 0,
-                    backgroundColor: `var(--cover-background-color-${index + 2})`,
+                    zIndex: 0,
+                    background: backgroundGradients?.[`gradient${index + 2}`]
+                      ? `var(--cover-background-gradient-${index + 2})`
+                      : `var(--cover-background-color-${index + 2})`,
                     clipPath: section.clipPath
                   }}
                 />

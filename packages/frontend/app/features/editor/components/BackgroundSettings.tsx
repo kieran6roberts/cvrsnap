@@ -11,7 +11,8 @@ import {
   SimpleGrid,
   UnstyledButton,
   Center,
-  Fieldset
+  Fieldset,
+  Divider
 } from '@mantine/core';
 import { MediaImageFolder, Check } from 'iconoir-react';
 import * as patterns from 'hero-patterns';
@@ -26,11 +27,17 @@ import { DrawerScrollArea } from '~/features/editor/components/DrawerScrollArea'
 import { SectionHeader } from '~/features/editor/components/SectionHeader';
 import { SettingsTabs } from '~/features/editor/components/SettingsTabs';
 import backgroundSettingsClasses from '~/features/editor/styles/BackgroundSettings.module.css';
+import { GradientPicker } from '~/features/editor/components/GradientPicker';
 
 export function BackgroundSettings() {
   const {
     template,
-    background: { image: backgroundImage, colors: backgroundColors, pattern: backgroundPattern },
+    background: {
+      image: backgroundImage,
+      colors: backgroundColors,
+      pattern: backgroundPattern,
+      gradients: backgroundGradients
+    },
     updateBackground,
     isResettingImage
   } = useEditor();
@@ -201,27 +208,57 @@ export function BackgroundSettings() {
                     label="Background color 1"
                     description="Accepts RGBA"
                     defaultValue={backgroundColors?.color1 ?? 'rgba(255, 255, 255, 1)'}
+                    disabled={!!backgroundGradients?.gradient1}
                     onChangeEnd={(value) =>
                       updateBackground({ colors: { ...backgroundColors, color1: value as RGBAColor } })
                     }
                   />
+                  <GradientPicker
+                    gradientStr={backgroundGradients?.gradient1 ?? null}
+                    updateBackground={(value) => {
+                      updateBackground({
+                        gradients: {
+                          ...backgroundGradients,
+                          gradient1: value
+                        }
+                      });
+                    }}
+                  />
+
+                  {}
 
                   {!isSolidTemplate ? (
-                    <ColorInput
-                      key={`color2-${isResettingImage}`}
-                      format="rgba"
-                      label="Background color 2"
-                      description="Accepts RGBA"
-                      defaultValue={backgroundColors?.color2 ?? 'rgba(255, 255, 255, 1)'}
-                      onChangeEnd={(value) =>
-                        updateBackground({ colors: { ...backgroundColors, color2: value as RGBAColor } })
-                      }
-                      disabled={!!backgroundImage}
-                    />
+                    <>
+                      <Divider />
+                      <ColorInput
+                        key={`color2-${isResettingImage}`}
+                        format="rgba"
+                        label="Background color 2"
+                        description="Accepts RGBA"
+                        defaultValue={backgroundColors?.color2 ?? 'rgba(255, 255, 255, 1)'}
+                        onChangeEnd={(value) =>
+                          updateBackground({ colors: { ...backgroundColors, color2: value as RGBAColor } })
+                        }
+                        disabled={!!backgroundImage || !!backgroundGradients?.gradient2}
+                      />
+
+                      <GradientPicker
+                        gradientStr={backgroundGradients?.gradient2 ?? null}
+                        updateBackground={(value) => {
+                          updateBackground({
+                            gradients: {
+                              ...backgroundGradients,
+                              gradient2: value
+                            }
+                          });
+                        }}
+                      />
+                    </>
                   ) : null}
 
                   {isMin3BackgroundTemplate ? (
                     <>
+                      <Divider />
                       <ColorInput
                         key={`color3-${isResettingImage}`}
                         format="rgba"
@@ -233,18 +270,43 @@ export function BackgroundSettings() {
                         }
                         disabled={!!backgroundImage}
                       />
+                      <GradientPicker
+                        gradientStr={backgroundGradients?.gradient3 ?? null}
+                        updateBackground={(value) => {
+                          updateBackground({
+                            gradients: {
+                              ...backgroundGradients,
+                              gradient3: value
+                            }
+                          });
+                        }}
+                      />
                       {isMin4BackgroundTemplate ? (
-                        <ColorInput
-                          key={`color4-${isResettingImage}`}
-                          format="rgba"
-                          label="Background color 4"
-                          description="Accepts RGBA"
-                          defaultValue={backgroundColors?.color4 ?? 'rgba(255, 255, 255, 1)'}
-                          onChangeEnd={(value) =>
-                            updateBackground({ colors: { ...backgroundColors, color4: value as RGBAColor } })
-                          }
-                          disabled={!!backgroundImage}
-                        />
+                        <>
+                          <Divider />
+                          <ColorInput
+                            key={`color4-${isResettingImage}`}
+                            format="rgba"
+                            label="Background color 4"
+                            description="Accepts RGBA"
+                            defaultValue={backgroundColors?.color4 ?? 'rgba(255, 255, 255, 1)'}
+                            onChangeEnd={(value) =>
+                              updateBackground({ colors: { ...backgroundColors, color4: value as RGBAColor } })
+                            }
+                            disabled={!!backgroundImage}
+                          />
+                          <GradientPicker
+                            gradientStr={backgroundGradients?.gradient4 ?? null}
+                            updateBackground={(value) => {
+                              updateBackground({
+                                gradients: {
+                                  ...backgroundGradients,
+                                  gradient4: value
+                                }
+                              });
+                            }}
+                          />
+                        </>
                       ) : null}
                     </>
                   ) : null}
