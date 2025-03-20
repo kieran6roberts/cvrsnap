@@ -30,10 +30,10 @@ export function Hero() {
         </Link>
         <Title
           order={1}
-          aria-label={`${SITE_NAME} - Effortless Blog Cover Design`}
+          aria-label={`${SITE_NAME} - Effortless Blog Cover Creation`}
           className={classes['hero-section-content--title']}
         >
-          Effortless Blog Cover Design with {SITE_NAME}
+          Effortless Blog Cover Creation with {SITE_NAME}
         </Title>
 
         <p className={classes['hero-section-content--copy']}>

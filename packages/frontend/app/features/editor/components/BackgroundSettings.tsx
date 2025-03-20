@@ -16,11 +16,17 @@ import {
 } from '@mantine/core';
 import { MediaImageFolder, Check } from 'iconoir-react';
 import * as patterns from 'hero-patterns';
+import { useDebouncedCallback } from '@mantine/hooks';
 
 import { useEditor } from '~/shared/stores/EditorContext';
 import { updateCSSVariables } from '~/shared/utils/styles';
 import classes from '~/features/editor/styles/BackgroundSection.module.css';
-import { decimalToPercentage, splitAndCapitalizeCamelCase } from '~/features/editor/utils';
+import {
+  decimalToPercentage,
+  splitAndCapitalizeCamelCase,
+  updateGradientDirection,
+  extractGradientDirectionNumber
+} from '~/features/editor/utils';
 import { BACKGROUND_TEMPLATES } from '../consts/templates';
 import { RGBAColor, HEXColor } from '~/shared/consts';
 import { DrawerScrollArea } from '~/features/editor/components/DrawerScrollArea';
@@ -92,6 +98,26 @@ export function BackgroundSettings() {
       });
     }
   };
+
+  const onGradientChange = ({ gradientStr, gradientIndex }: { gradientStr: string; gradientIndex: number }) => {
+    updateBackground({
+      gradients: {
+        ...backgroundGradients,
+        [`gradient${gradientIndex}`]: gradientStr
+      }
+    });
+  };
+
+  const onGradientDirectionChange = useDebouncedCallback(
+    ({ direction, gradientIndex }: { direction: string; gradientIndex: number }) => {
+      const updatedGradient = updateGradientDirection({
+        gradientStr: backgroundGradients?.[`gradient${gradientIndex}`] ?? '',
+        direction
+      });
+      onGradientChange({ gradientStr: updatedGradient, gradientIndex });
+    },
+    300
+  );
 
   return (
     <>
@@ -215,17 +241,13 @@ export function BackgroundSettings() {
                   />
                   <GradientPicker
                     gradientStr={backgroundGradients?.gradient1 ?? null}
-                    updateBackground={(value) => {
-                      updateBackground({
-                        gradients: {
-                          ...backgroundGradients,
-                          gradient1: value
-                        }
-                      });
-                    }}
+                    updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 1 })}
+                    updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 1 })}
+                    defaultDirection={extractGradientDirectionNumber({
+                      gradientStr: backgroundGradients?.gradient1 ?? ''
+                    })}
+                    gradientUpdateKey={`gradient1-${isResettingImage}`}
                   />
-
-                  {}
 
                   {!isSolidTemplate ? (
                     <>
@@ -244,14 +266,12 @@ export function BackgroundSettings() {
 
                       <GradientPicker
                         gradientStr={backgroundGradients?.gradient2 ?? null}
-                        updateBackground={(value) => {
-                          updateBackground({
-                            gradients: {
-                              ...backgroundGradients,
-                              gradient2: value
-                            }
-                          });
-                        }}
+                        updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 2 })}
+                        updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 2 })}
+                        defaultDirection={extractGradientDirectionNumber({
+                          gradientStr: backgroundGradients?.gradient2 ?? ''
+                        })}
+                        gradientUpdateKey={`gradient2-${isResettingImage}`}
                       />
                     </>
                   ) : null}
@@ -272,14 +292,12 @@ export function BackgroundSettings() {
                       />
                       <GradientPicker
                         gradientStr={backgroundGradients?.gradient3 ?? null}
-                        updateBackground={(value) => {
-                          updateBackground({
-                            gradients: {
-                              ...backgroundGradients,
-                              gradient3: value
-                            }
-                          });
-                        }}
+                        updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 3 })}
+                        updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 3 })}
+                        defaultDirection={extractGradientDirectionNumber({
+                          gradientStr: backgroundGradients?.gradient3 ?? ''
+                        })}
+                        gradientUpdateKey={`gradient3-${isResettingImage}`}
                       />
                       {isMin4BackgroundTemplate ? (
                         <>
@@ -297,14 +315,14 @@ export function BackgroundSettings() {
                           />
                           <GradientPicker
                             gradientStr={backgroundGradients?.gradient4 ?? null}
-                            updateBackground={(value) => {
-                              updateBackground({
-                                gradients: {
-                                  ...backgroundGradients,
-                                  gradient4: value
-                                }
-                              });
-                            }}
+                            updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 4 })}
+                            updateDirection={(value) =>
+                              onGradientDirectionChange({ direction: value, gradientIndex: 4 })
+                            }
+                            defaultDirection={extractGradientDirectionNumber({
+                              gradientStr: backgroundGradients?.gradient4 ?? ''
+                            })}
+                            gradientUpdateKey={`gradient4-${isResettingImage}`}
                           />
                         </>
                       ) : null}

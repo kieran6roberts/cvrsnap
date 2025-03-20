@@ -1,4 +1,4 @@
-import { Select, Divider, Group, Flex, Box, SelectProps } from '@mantine/core';
+import { Select, Divider, Group, Flex, Box, SelectProps, NumberInput } from '@mantine/core';
 import { Check } from 'iconoir-react';
 
 import { GRADIENT_PRESETS } from '~/features/editor/consts';
@@ -16,20 +16,27 @@ const renderSelectOption: SelectProps['renderOption'] = ({ option, checked }) =>
 
 export function GradientPicker({
   gradientStr,
-  updateBackground
+  updateBackground,
+  updateDirection,
+  defaultDirection,
+  gradientUpdateKey
 }: {
   gradientStr: string | null;
-  updateBackground: (gradientString: string) => void;
+  updateBackground: (gradientStr: string) => void;
+  updateDirection: (direction: string) => void;
+  defaultDirection: number;
+  gradientUpdateKey: string;
 }) {
   return (
     <>
       <Divider label="Alternatively:" labelPosition="left" />
 
       <Select
+        key={gradientUpdateKey}
         data={GRADIENT_PRESETS.map((preset) => {
           const gradientString = constructGradientString({
             type: preset.value.type,
-            direction: '90deg',
+            direction: `${defaultDirection}deg`,
             colors: preset.value.colors
           });
 
@@ -48,8 +55,8 @@ export function GradientPicker({
           'aria-label': 'Clear gradient'
         }}
         placeholder="Select a gradient"
-        description="Pick a preset CSS linear-gradient"
-        defaultValue={gradientStr ?? null}
+        label="Pick a preset CSS linear-gradient"
+        value={gradientStr ?? null}
         renderOption={renderSelectOption}
         onChange={(value) => {
           if (!value) {
@@ -58,6 +65,25 @@ export function GradientPicker({
           updateBackground(value);
         }}
       />
+      {gradientStr ? (
+        <NumberInput
+          label="Gradient direction (degrees)"
+          disabled={!gradientStr}
+          defaultValue={defaultDirection}
+          clampBehavior="strict"
+          suffix="°"
+          min={0}
+          max={360}
+          step={1}
+          onChange={(value) => {
+            if (!value) {
+              return;
+            }
+            const direction = `${value}deg`;
+            updateDirection(direction);
+          }}
+        />
+      ) : null}
     </>
   );
 }

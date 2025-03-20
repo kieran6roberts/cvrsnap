@@ -27,12 +27,27 @@ export function constructGradientString({
   return `${type}(${direction}, ${colors.join(', ')})`;
 }
 
-// /**
-//  * Extracts the direction from a gradient string
-//  * @param gradientStr - The gradient string to extract the direction from
-//  * @returns The direction from the gradient string
-//  */
-// export function extractDirectionFromGradientString(gradientStr: string) {
-//   const match = gradientStr.match(/linear-gradient\(([^,]+),/);
-//   return match ? match[1].trim() : 'to bottom';
-// }
+/**
+ * Updates the direction of a gradient string
+ * @param gradientStr - The gradient string to update the direction of
+ * @param direction - The new direction of the gradient
+ * @returns The updated gradient string
+ */
+export function updateGradientDirection({ gradientStr, direction }: { gradientStr: string; direction: string }) {
+  const deg = gradientStr.slice(gradientStr.indexOf('(') + 1, gradientStr.indexOf(','));
+  return gradientStr.replace(deg, direction);
+}
+
+/**
+ * Extracts the direction number from a gradient string
+ * @param gradientStr - The gradient string to extract the direction number from
+ * @returns The direction number
+ */
+export function extractGradientDirectionNumber({ gradientStr }: { gradientStr: string }) {
+  if (!gradientStr) {
+    return 90;
+  }
+  const deg = gradientStr.slice(gradientStr.indexOf('(') + 1, gradientStr.indexOf(','));
+  const degNumber = parseInt(deg.replace('deg', ''));
+  return degNumber;
+}
