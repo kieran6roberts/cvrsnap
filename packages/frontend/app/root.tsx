@@ -6,6 +6,8 @@ import { ToastProvider } from '~/shared/providers/ToastProvider';
 import { DOMAIN, SITE_NAME } from '~/config/consts';
 import '~/shared/styles/index.css';
 
+const DESCRIPTION = `A great blog post needs a great cover. ${SITE_NAME} helps you create stunning blog cover images in seconds with easy-to-use templates and editing tools. It's completely free to download as many cover images as you like.`;
+
 export const links: LinksFunction = () => [
   {
     rel: 'apple-touch-icon',
@@ -148,12 +150,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en" {...mantineHtmlProps}>
       <head>
         <meta charSet="utf-8" />
+        <title>{`${SITE_NAME} - Effortless Blog Cover Creation`}</title>
+        <meta name="description" content={DESCRIPTION} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:title" content={`${SITE_NAME} - Effortless Blog Cover Creation`} />
-        <meta
-          property="og:description"
-          content={`A great blog post needs a great cover. ${SITE_NAME} helps you create stunning blog cover images in seconds with easy-to-use templates and editing tools. It's completely free to download as many cover images as you like.`}
-        />
+        <meta property="og:description" content={DESCRIPTION} />
         <meta property="og:image" content={`https://${DOMAIN}/og-img.png?v=3`} />
         <meta property="og:image:alt" content="CvrSnap - Create blog post cover images in seconds" />
         <meta property="og:image:width" content="1200" />
