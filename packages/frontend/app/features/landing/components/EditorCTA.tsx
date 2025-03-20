@@ -13,7 +13,7 @@ export function EditorCTA() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className={classes.title}
       >
-        Ready to build?
+        What are you waiting for?
       </motion.h2>
       <motion.p
         initial={{ opacity: 0 }}
