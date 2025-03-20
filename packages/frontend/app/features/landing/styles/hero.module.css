@@ -68,7 +68,11 @@
     }
 
     &--message-free {
-      color: var(--mantine-color-green-7);
+      color: var(--mantine-color-green-9);
+
+      [data-mantine-color-scheme='dark'] & {
+        color: var(--mantine-color-green-2);
+      }
     }
   }
 }

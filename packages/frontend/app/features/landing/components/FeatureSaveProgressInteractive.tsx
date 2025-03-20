@@ -31,6 +31,10 @@ export function FeatureSaveProgressInteractive() {
         format="rgba"
         defaultValue={bgColor}
         onChangeEnd={(value) => handleBgColorChange(value as RGBAColor)}
+        aria-label="Test color picker"
+        eyeDropperButtonProps={{
+          'aria-label': 'Test color picker dropper'
+        }}
       />
     </>
   );

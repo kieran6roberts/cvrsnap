@@ -18,6 +18,7 @@ export function FeatureSizeInteractive() {
       onAspectRatioChange={(value) => onAspectRatioChange(value as DownloadSizeInfo | null)}
       width="100%"
       size="sm"
+      aria-label="Test cover image size"
     />
   );
 }
