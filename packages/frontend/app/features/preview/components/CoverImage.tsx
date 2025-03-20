@@ -66,7 +66,7 @@ export function CoverImage({ imageNodeRef }: { imageNodeRef: React.RefObject<HTM
         />
       </Flex>
 
-      <Box id="coverStyleProvider" className={classNames(classes.coverWrapper)}>
+      <Box className={classNames(classes.coverWrapper)}>
         {!isDrawerOpen ? (
           <Tooltip label="Open sidebar">
             <ActionIcon

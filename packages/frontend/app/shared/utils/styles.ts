@@ -2,7 +2,7 @@ import { CSSVariableKey } from '~/shared/types/styles';
 import type { DownloadSizeInfo } from '~/shared/consts';
 
 export const updateCSSVariables = (variables: Partial<Record<CSSVariableKey, string>>) => {
-  const coverStyleProvider = document.getElementById('coverStyleProvider');
+  const coverStyleProvider = document.getElementById('body');
   if (!coverStyleProvider) {
     return;
   }

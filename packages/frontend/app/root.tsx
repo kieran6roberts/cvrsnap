@@ -173,7 +173,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <script defer data-domain={DOMAIN} data-api="/api/event" src="/js/script.tagged-events.js"></script>
         ) : null}
       </head>
-      <body>
+      <body id="body">
         <MantineProvider theme={theme}>{children}</MantineProvider>
         <ToastProvider />
         <ScrollRestoration />

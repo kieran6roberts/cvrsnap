@@ -338,17 +338,23 @@ export function BackgroundSettings() {
             content: (
               <Fieldset>
                 <Stack px="sm">
-                  <FileInput
-                    clearable
-                    description="Accepts PNG, JPEG, and WEBP"
-                    leftSection={<MediaImageFolder width={16} height={16} />}
-                    accept="image/png,image/jpeg,image/webp"
-                    label="Upload background image"
-                    placeholder="Click to upload"
-                    onChange={onBackgroundImageChange}
-                    disabled={!!backgroundImage}
-                  />
-                  {backgroundImage ? (
+                  {!backgroundImage ? (
+                    <>
+                      <FileInput
+                        clearable
+                        description="Accepts PNG, JPEG, and WEBP"
+                        leftSection={<MediaImageFolder width={16} height={16} />}
+                        accept="image/png,image/jpeg,image/webp"
+                        label="Upload background image"
+                        placeholder="Click to upload"
+                        onChange={onBackgroundImageChange}
+                        disabled={!!backgroundImage}
+                      />
+                      <div className={backgroundSettingsClasses['background-image-placeholder']}>
+                        Image will appear here
+                      </div>
+                    </>
+                  ) : (
                     <>
                       <Image
                         src={backgroundImage}
@@ -372,29 +378,21 @@ export function BackgroundSettings() {
                       >
                         Remove image
                       </Button>
-                    </>
-                  ) : (
-                    <>
-                      <div className={backgroundSettingsClasses['background-image-placeholder']}>
-                        Image will appear here
-                      </div>
+                      <NumberInput
+                        defaultValue={0}
+                        max={1}
+                        min={0}
+                        step={0.1}
+                        decimalScale={1}
+                        onChange={(value) => {
+                          const percentage = value ? decimalToPercentage(Number(value)) : 0;
+                          updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
+                        }}
+                        label="Overlay opacity"
+                        allowNegative={false}
+                      />
                     </>
                   )}
-                  {backgroundImage ? (
-                    <NumberInput
-                      defaultValue={0}
-                      max={1}
-                      min={0}
-                      step={0.1}
-                      decimalScale={1}
-                      onChange={(value) => {
-                        const percentage = value ? decimalToPercentage(Number(value)) : 0;
-                        updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
-                      }}
-                      label="Overlay opacity"
-                      allowNegative={false}
-                    />
-                  ) : null}
                 </Stack>
               </Fieldset>
             )
