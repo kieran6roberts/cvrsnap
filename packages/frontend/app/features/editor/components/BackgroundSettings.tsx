@@ -11,26 +11,39 @@ import {
   SimpleGrid,
   UnstyledButton,
   Center,
-  Fieldset
+  Fieldset,
+  Divider
 } from '@mantine/core';
 import { MediaImageFolder, Check } from 'iconoir-react';
 import * as patterns from 'hero-patterns';
+import { useDebouncedCallback } from '@mantine/hooks';
 
 import { useEditor } from '~/shared/stores/EditorContext';
 import { updateCSSVariables } from '~/shared/utils/styles';
 import classes from '~/features/editor/styles/BackgroundSection.module.css';
-import { decimalToPercentage, splitAndCapitalizeCamelCase } from '~/features/editor/utils';
+import {
+  decimalToPercentage,
+  splitAndCapitalizeCamelCase,
+  updateGradientDirection,
+  extractGradientDirectionNumber
+} from '~/features/editor/utils';
 import { BACKGROUND_TEMPLATES } from '../consts/templates';
 import { RGBAColor, HEXColor } from '~/shared/consts';
 import { DrawerScrollArea } from '~/features/editor/components/DrawerScrollArea';
 import { SectionHeader } from '~/features/editor/components/SectionHeader';
 import { SettingsTabs } from '~/features/editor/components/SettingsTabs';
 import backgroundSettingsClasses from '~/features/editor/styles/BackgroundSettings.module.css';
+import { GradientPicker } from '~/features/editor/components/GradientPicker';
 
 export function BackgroundSettings() {
   const {
     template,
-    background: { image: backgroundImage, colors: backgroundColors, pattern: backgroundPattern },
+    background: {
+      image: backgroundImage,
+      colors: backgroundColors,
+      pattern: backgroundPattern,
+      gradients: backgroundGradients
+    },
     updateBackground,
     isResettingImage
   } = useEditor();
@@ -85,6 +98,26 @@ export function BackgroundSettings() {
       });
     }
   };
+
+  const onGradientChange = ({ gradientStr, gradientIndex }: { gradientStr: string; gradientIndex: number }) => {
+    updateBackground({
+      gradients: {
+        ...backgroundGradients,
+        [`gradient${gradientIndex}`]: gradientStr
+      }
+    });
+  };
+
+  const onGradientDirectionChange = useDebouncedCallback(
+    ({ direction, gradientIndex }: { direction: string; gradientIndex: number }) => {
+      const updatedGradient = updateGradientDirection({
+        gradientStr: backgroundGradients?.[`gradient${gradientIndex}`] ?? '',
+        direction
+      });
+      onGradientChange({ gradientStr: updatedGradient, gradientIndex });
+    },
+    300
+  );
 
   return (
     <>
@@ -201,27 +234,53 @@ export function BackgroundSettings() {
                     label="Background color 1"
                     description="Accepts RGBA"
                     defaultValue={backgroundColors?.color1 ?? 'rgba(255, 255, 255, 1)'}
+                    disabled={!!backgroundGradients?.gradient1 && !backgroundImage}
                     onChangeEnd={(value) =>
                       updateBackground({ colors: { ...backgroundColors, color1: value as RGBAColor } })
                     }
                   />
+                  <GradientPicker
+                    disabled={!!backgroundImage}
+                    gradientStr={backgroundGradients?.gradient1 ?? null}
+                    updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 1 })}
+                    updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 1 })}
+                    defaultDirection={extractGradientDirectionNumber({
+                      gradientStr: backgroundGradients?.gradient1 ?? ''
+                    })}
+                    gradientUpdateKey={`gradient1-${isResettingImage}`}
+                  />
 
                   {!isSolidTemplate ? (
-                    <ColorInput
-                      key={`color2-${isResettingImage}`}
-                      format="rgba"
-                      label="Background color 2"
-                      description="Accepts RGBA"
-                      defaultValue={backgroundColors?.color2 ?? 'rgba(255, 255, 255, 1)'}
-                      onChangeEnd={(value) =>
-                        updateBackground({ colors: { ...backgroundColors, color2: value as RGBAColor } })
-                      }
-                      disabled={!!backgroundImage}
-                    />
+                    <>
+                      <Divider />
+                      <ColorInput
+                        key={`color2-${isResettingImage}`}
+                        format="rgba"
+                        label="Background color 2"
+                        description="Accepts RGBA"
+                        defaultValue={backgroundColors?.color2 ?? 'rgba(255, 255, 255, 1)'}
+                        onChangeEnd={(value) =>
+                          updateBackground({ colors: { ...backgroundColors, color2: value as RGBAColor } })
+                        }
+                        disabled={!!backgroundImage || !!backgroundGradients?.gradient2}
+                      />
+
+                      <GradientPicker
+                        disabled={!!backgroundImage}
+                        gradientStr={backgroundGradients?.gradient2 ?? null}
+                        updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 2 })}
+                        updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 2 })}
+                        defaultDirection={extractGradientDirectionNumber({
+                          gradientStr: backgroundGradients?.gradient2 ?? ''
+                        })}
+                        gradientUpdateKey={`gradient2-${isResettingImage}`}
+                      />
+                    </>
                   ) : null}
 
                   {isMin3BackgroundTemplate ? (
                     <>
+                      <Divider />
                       <ColorInput
                         key={`color3-${isResettingImage}`}
                         format="rgba"
@@ -231,20 +290,45 @@ export function BackgroundSettings() {
                         onChangeEnd={(value) =>
                           updateBackground({ colors: { ...backgroundColors, color3: value as RGBAColor } })
                         }
+                        disabled={!!backgroundImage || !!backgroundGradients?.gradient3}
+                      />
+                      <GradientPicker
                         disabled={!!backgroundImage}
+                        gradientStr={backgroundGradients?.gradient3 ?? null}
+                        updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 3 })}
+                        updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 3 })}
+                        defaultDirection={extractGradientDirectionNumber({
+                          gradientStr: backgroundGradients?.gradient3 ?? ''
+                        })}
+                        gradientUpdateKey={`gradient3-${isResettingImage}`}
                       />
                       {isMin4BackgroundTemplate ? (
-                        <ColorInput
-                          key={`color4-${isResettingImage}`}
-                          format="rgba"
-                          label="Background color 4"
-                          description="Accepts RGBA"
-                          defaultValue={backgroundColors?.color4 ?? 'rgba(255, 255, 255, 1)'}
-                          onChangeEnd={(value) =>
-                            updateBackground({ colors: { ...backgroundColors, color4: value as RGBAColor } })
-                          }
-                          disabled={!!backgroundImage}
-                        />
+                        <>
+                          <Divider />
+                          <ColorInput
+                            key={`color4-${isResettingImage}`}
+                            format="rgba"
+                            label="Background color 4"
+                            description="Accepts RGBA"
+                            defaultValue={backgroundColors?.color4 ?? 'rgba(255, 255, 255, 1)'}
+                            onChangeEnd={(value) =>
+                              updateBackground({ colors: { ...backgroundColors, color4: value as RGBAColor } })
+                            }
+                            disabled={!!backgroundImage || !!backgroundGradients?.gradient4}
+                          />
+                          <GradientPicker
+                            disabled={!!backgroundImage}
+                            gradientStr={backgroundGradients?.gradient4 ?? null}
+                            updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 4 })}
+                            updateDirection={(value) =>
+                              onGradientDirectionChange({ direction: value, gradientIndex: 4 })
+                            }
+                            defaultDirection={extractGradientDirectionNumber({
+                              gradientStr: backgroundGradients?.gradient4 ?? ''
+                            })}
+                            gradientUpdateKey={`gradient4-${isResettingImage}`}
+                          />
+                        </>
                       ) : null}
                     </>
                   ) : null}
@@ -258,17 +342,23 @@ export function BackgroundSettings() {
             content: (
               <Fieldset>
                 <Stack px="sm">
-                  <FileInput
-                    clearable
-                    description="Accepts PNG, JPEG, and WEBP"
-                    leftSection={<MediaImageFolder width={16} height={16} />}
-                    accept="image/png,image/jpeg,image/webp"
-                    label="Upload background image"
-                    placeholder="Click to upload"
-                    onChange={onBackgroundImageChange}
-                    disabled={!!backgroundImage}
-                  />
-                  {backgroundImage ? (
+                  {!backgroundImage ? (
+                    <>
+                      <FileInput
+                        clearable
+                        description="Accepts PNG, JPEG, and WEBP"
+                        leftSection={<MediaImageFolder width={16} height={16} />}
+                        accept="image/png,image/jpeg,image/webp"
+                        label="Upload background image"
+                        placeholder="Click to upload"
+                        onChange={onBackgroundImageChange}
+                        disabled={!!backgroundImage}
+                      />
+                      <div className={backgroundSettingsClasses['background-image-placeholder']}>
+                        Image will appear here
+                      </div>
+                    </>
+                  ) : (
                     <>
                       <Image
                         src={backgroundImage}
@@ -292,29 +382,21 @@ export function BackgroundSettings() {
                       >
                         Remove image
                       </Button>
-                    </>
-                  ) : (
-                    <>
-                      <div className={backgroundSettingsClasses['background-image-placeholder']}>
-                        Image will appear here
-                      </div>
+                      <NumberInput
+                        defaultValue={0}
+                        max={1}
+                        min={0}
+                        step={0.1}
+                        decimalScale={1}
+                        onChange={(value) => {
+                          const percentage = value ? decimalToPercentage(Number(value)) : 0;
+                          updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
+                        }}
+                        label="Overlay opacity"
+                        allowNegative={false}
+                      />
                     </>
                   )}
-                  {backgroundImage ? (
-                    <NumberInput
-                      defaultValue={0}
-                      max={1}
-                      min={0}
-                      step={0.1}
-                      decimalScale={1}
-                      onChange={(value) => {
-                        const percentage = value ? decimalToPercentage(Number(value)) : 0;
-                        updateCSSVariables({ '--cover-color-overlay-opacity': `${percentage}%` });
-                      }}
-                      label="Overlay opacity"
-                      allowNegative={false}
-                    />
-                  ) : null}
                 </Stack>
               </Fieldset>
             )
