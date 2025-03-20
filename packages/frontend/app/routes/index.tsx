@@ -10,6 +10,7 @@ import { SectionContainer } from '~/features/landing/components/SectionContainer
 import { SectionHeader } from '~/features/landing/components/SectionHeader';
 import { Hero } from '~/features/landing/components/Hero';
 import { EditorCTA } from '~/features/landing/components/EditorCTA';
+import { TargetCustomerList } from '~/features/landing/components/TargetCustomerList';
 
 export const meta: MetaFunction = () => {
   const title = `${SITE_NAME} - Effortless Blog Cover Creation`;
@@ -27,12 +28,20 @@ export default function Index() {
         <CoverExampleList />
         <SectionContainer>
           <SectionHeader
+            title="Who is CvrSnap for?"
+            copy="CvrSnap is designed primarily for users who don't want to spend hours designing custom cover images using design tools. Here are some categories of people who may find CvrSnap useful."
+          />
+          <TargetCustomerList />
+        </SectionContainer>
+        <SectionContainer>
+          <SectionHeader
             title="Features"
             copy="CvrSnap is a blog cover creation tool that helps you create stunning blog cover images in seconds with easy-to-use templates and editing tools. Here are some of the features that make it so great."
           />
           <FeatureList />
         </SectionContainer>
         <SectionContainer>
+          <SectionHeader title="Ready to build free blog covers?" isCenter />
           <EditorCTA />
         </SectionContainer>
       </Container>

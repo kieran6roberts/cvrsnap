@@ -69,6 +69,9 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    padding: 0.5rem;
+    border-radius: var(--mantine-radius-md);
+    background-color: var(--mantine-color-gray-1);
   }
 
   .feature-description {
