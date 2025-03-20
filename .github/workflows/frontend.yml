@@ -52,6 +52,25 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
           retention-days: 1
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: ${{ env.PNPM_VERSION }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - name: Install dependencies
+        run: pnpm i
+        working-directory: .
+      - name: Run unit tests
+        working-directory: packages/frontend
+        run: pnpm tests:unit:run
   type-check:
     runs-on: ubuntu-latest
     steps:

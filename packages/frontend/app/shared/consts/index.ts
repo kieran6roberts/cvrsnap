@@ -112,6 +112,13 @@ export type SecondaryTextSettings = {
 };
 
 export type BackgroundColors = Record<`color${number}`, RGBAColor>;
+export type BackgroundGradients = {
+  [key: `gradient${number}`]: {
+    value: HEXColor[];
+    direction: string;
+    type: 'linear-gradient';
+  };
+};
 
 type BackgroundPatternSettings = {
   url: string | null;
@@ -133,6 +140,9 @@ export type BackgroundSettings = {
   image: string | null;
   colors: BackgroundColors;
   pattern: BackgroundPatternSettings;
+  gradients: {
+    [key: `gradient${number}`]: string;
+  };
 };
 
 const defaultPrimaryTextSettings: PrimaryTextSettings = {
@@ -156,6 +166,13 @@ const defaultBackgroundColors: BackgroundColors = {
   color4: 'rgba(176, 171, 171, 1)'
 };
 
+const defaultGradients = {
+  gradient1: '',
+  gradient2: '',
+  gradient3: '',
+  gradient4: ''
+};
+
 const defaultPatternSettings: BackgroundPatternSettings = {
   url: '',
   name: '',
@@ -166,6 +183,7 @@ const defaultPatternSettings: BackgroundPatternSettings = {
 const defaultBackground: BackgroundSettings = {
   image: null,
   colors: defaultBackgroundColors,
+  gradients: defaultGradients,
   pattern: defaultPatternSettings
 };
 

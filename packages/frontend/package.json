@@ -20,9 +20,10 @@
     "typecheck": "react-router typegen && tsc",
     "format": "pnpm lint && pnpm prettier:fix",
     "format:all": "pnpm typecheck && pnpm lint && pnpm prettier:fix",
-    "tests:open": "start-server-and-test 'pnpm dev' http://localhost:5173 'cypress open'",
-    "tests:run": "start-server-and-test 'pnpm dev' http://localhost:5173 'cypress run'",
-    "tests:run:ci": "cypress run"
+    "tests:e2e:open": "start-server-and-test 'pnpm dev' http://localhost:5173 'cypress open'",
+    "tests:e2e:run": "start-server-and-test 'pnpm dev' http://localhost:5173 'cypress run'",
+    "tests:e2e:run:ci": "cypress run",
+    "tests:unit:run": "vitest"
   },
   "dependencies": {
     "@mantine/core": "^7.15.2",
@@ -73,6 +74,7 @@
     "prettier": "^3.4.2",
     "typescript": "^5.7.2",
     "vite": "^5.4.11",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.9"
   }
 }

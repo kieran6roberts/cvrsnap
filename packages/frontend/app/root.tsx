@@ -149,7 +149,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content={`${SITE_NAME} - Effortless Blog Cover Design`} />
+        <meta property="og:title" content={`${SITE_NAME} - Effortless Blog Cover Creation`} />
         <meta
           property="og:description"
           content={`A great blog post needs a great cover. ${SITE_NAME} helps you create stunning blog cover images in seconds with easy-to-use templates and editing tools. It's completely free to download as many cover images as you like.`}
@@ -173,7 +173,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <script defer data-domain={DOMAIN} data-api="/api/event" src="/js/script.tagged-events.js"></script>
         ) : null}
       </head>
-      <body>
+      <body id="body">
         <MantineProvider theme={theme}>{children}</MantineProvider>
         <ToastProvider />
         <ScrollRestoration />

@@ -20,6 +20,10 @@ export const PREVIEW_VARIABLE_NAMES = {
     color2: '--cover-background-color-2',
     color3: '--cover-background-color-3',
     color4: '--cover-background-color-4',
+    gradient1: '--cover-background-gradient-1',
+    gradient2: '--cover-background-gradient-2',
+    gradient3: '--cover-background-gradient-3',
+    gradient4: '--cover-background-gradient-4',
     opacity: '--cover-color-overlay-opacity'
   },
   cover: {
