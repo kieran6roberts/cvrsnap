@@ -1,4 +1,6 @@
 import { HEXColor } from '~/shared/consts';
+import { DEFAULT_GRADIENT_DIRECTION } from '~/features/editor/consts';
+
 export const decimalToPercentage = (decimal: number) => decimal * 100;
 
 export function splitAndCapitalizeCamelCase(str: string) {
@@ -43,11 +45,15 @@ export function updateGradientDirection({ gradientStr, direction }: { gradientSt
  * @param gradientStr - The gradient string to extract the direction number from
  * @returns The direction number
  */
-export function extractGradientDirectionNumber({ gradientStr }: { gradientStr: string }) {
+export function extractGradientDirectionNumber({ gradientStr }: { gradientStr: string | null }) {
   if (!gradientStr) {
-    return 90;
+    return DEFAULT_GRADIENT_DIRECTION;
   }
   const deg = gradientStr.slice(gradientStr.indexOf('(') + 1, gradientStr.indexOf(','));
   const degNumber = parseInt(deg.replace('deg', ''));
+
+  if (isNaN(degNumber)) {
+    return DEFAULT_GRADIENT_DIRECTION;
+  }
   return degNumber;
 }

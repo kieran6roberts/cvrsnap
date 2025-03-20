@@ -1,5 +1,7 @@
 import { HEXColor } from '~/shared/consts';
 
+export const DEFAULT_GRADIENT_DIRECTION = 90;
+
 export const GRADIENT_PRESETS: {
   id: string;
   name: string;
