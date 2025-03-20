@@ -1,4 +1,4 @@
-:root {
+.coverWrapper {
   /* Cover Wrapper */
   --cover-display: flex;
   --cover-justify-content: center;
@@ -30,9 +30,7 @@
   --cover-secondary-position: relative;
 
   --cover-zoom: scale(1);
-}
 
-.coverWrapper {
   display: flex;
   position: relative;
   flex-direction: column;

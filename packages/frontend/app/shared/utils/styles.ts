@@ -2,9 +2,12 @@ import { CSSVariableKey } from '~/shared/types/styles';
 import type { DownloadSizeInfo } from '~/shared/consts';
 
 export const updateCSSVariables = (variables: Partial<Record<CSSVariableKey, string>>) => {
-  const root = document.documentElement;
+  const coverStyleProvider = document.getElementById('coverStyleProvider');
+  if (!coverStyleProvider) {
+    return;
+  }
   (Object.entries(variables) as [CSSVariableKey, string][]).forEach(([key, value]) => {
-    root.style.setProperty(key, value);
+    coverStyleProvider.style.setProperty(key, value);
   });
 };
 
