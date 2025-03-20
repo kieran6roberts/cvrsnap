@@ -1,4 +1,4 @@
-import { Stack, Badge, Title, Button, Flex } from '@mantine/core';
+import { Stack, Badge, Button, Flex } from '@mantine/core';
 import { Link } from 'react-router';
 import { ArrowUpRight, MapsArrowDiagonal, CheckCircle } from 'iconoir-react';
 
@@ -28,13 +28,12 @@ export function Hero() {
             Read about CvrSnap
           </Badge>
         </Link>
-        <Title
-          order={1}
+        <h1
           aria-label={`${SITE_NAME} - Effortless Blog Cover Creation`}
           className={classes['hero-section-content--title']}
         >
-          Effortless Blog Cover Creation with {SITE_NAME}
-        </Title>
+          Effortless Blog Cover Creation With {SITE_NAME}
+        </h1>
 
         <p className={classes['hero-section-content--copy']}>
           A great blog post needs a great cover. CvrSnap helps you create stunning blog cover images in seconds with
