@@ -19,13 +19,15 @@ export function GradientPicker({
   updateBackground,
   updateDirection,
   defaultDirection,
-  gradientUpdateKey
+  gradientUpdateKey,
+  disabled
 }: {
   gradientStr: string | null;
   updateBackground: (gradientStr: string) => void;
   updateDirection: (direction: string) => void;
   defaultDirection: number;
   gradientUpdateKey: string;
+  disabled?: boolean;
 }) {
   return (
     <>
@@ -46,6 +48,7 @@ export function GradientPicker({
           };
         })}
         searchable
+        disabled={!!disabled}
         allowDeselect={false}
         clearable
         clearButtonProps={{
@@ -68,7 +71,7 @@ export function GradientPicker({
       {gradientStr ? (
         <NumberInput
           label="Gradient direction (degrees)"
-          disabled={!gradientStr}
+          disabled={!gradientStr || !!disabled}
           defaultValue={defaultDirection}
           clampBehavior="strict"
           suffix="°"

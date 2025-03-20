@@ -234,12 +234,13 @@ export function BackgroundSettings() {
                     label="Background color 1"
                     description="Accepts RGBA"
                     defaultValue={backgroundColors?.color1 ?? 'rgba(255, 255, 255, 1)'}
-                    disabled={!!backgroundGradients?.gradient1}
+                    disabled={!!backgroundGradients?.gradient1 && !backgroundImage}
                     onChangeEnd={(value) =>
                       updateBackground({ colors: { ...backgroundColors, color1: value as RGBAColor } })
                     }
                   />
                   <GradientPicker
+                    disabled={!!backgroundImage}
                     gradientStr={backgroundGradients?.gradient1 ?? null}
                     updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 1 })}
                     updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 1 })}
@@ -265,6 +266,7 @@ export function BackgroundSettings() {
                       />
 
                       <GradientPicker
+                        disabled={!!backgroundImage}
                         gradientStr={backgroundGradients?.gradient2 ?? null}
                         updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 2 })}
                         updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 2 })}
@@ -288,9 +290,10 @@ export function BackgroundSettings() {
                         onChangeEnd={(value) =>
                           updateBackground({ colors: { ...backgroundColors, color3: value as RGBAColor } })
                         }
-                        disabled={!!backgroundImage}
+                        disabled={!!backgroundImage || !!backgroundGradients?.gradient3}
                       />
                       <GradientPicker
+                        disabled={!!backgroundImage}
                         gradientStr={backgroundGradients?.gradient3 ?? null}
                         updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 3 })}
                         updateDirection={(value) => onGradientDirectionChange({ direction: value, gradientIndex: 3 })}
@@ -311,9 +314,10 @@ export function BackgroundSettings() {
                             onChangeEnd={(value) =>
                               updateBackground({ colors: { ...backgroundColors, color4: value as RGBAColor } })
                             }
-                            disabled={!!backgroundImage}
+                            disabled={!!backgroundImage || !!backgroundGradients?.gradient4}
                           />
                           <GradientPicker
+                            disabled={!!backgroundImage}
                             gradientStr={backgroundGradients?.gradient4 ?? null}
                             updateBackground={(value) => onGradientChange({ gradientStr: value, gradientIndex: 4 })}
                             updateDirection={(value) =>
